@@ -220,30 +220,71 @@ int main()
 	
 	```
 	// 1.6 stack_heap practice
+	```
+	// 1.6.2 stack_heap practice
 	char *get_mem(int size)
 	{
 		char *p2 = NULL;
-		p2 = (char*)malloc(size); // heap
+		p2 = (char*)malloc(size);
+		printf("p2 point address: %p\n", p2); // heap # 0x20bf010
 		return p2;
 	}
-
 	int main()
 	{
-		char buf[100]; // stack
-		int a = 10; // stack
-		int *p;	
-		p = &a;	
-		*p = 20; // stack
+		char buf[100];
+		printf("buf point address: %p\n", buf);	// stack #0x7ffdf9e993e0
+		printf("buf[0] point address: %p\n", &buf[0]); // stack # 0x7ffdf9e993e0
+		printf("buf[1] point address: %p\n", &buf[1]); // stack # 0x7ffdf9e993e1
+		printf("buf[0] point data: %d\n", buf[0]); // # -1
+		printf("buf[1] point data: %d\n", buf[1]); // # -1
+		printf("buf[98] point data: %d\n", buf[98]); // # -23
+		printf("buf[99] point data: %d\n", buf[99]); // # -7
+		printf("buf[100] point data: %d\n", buf[100]); // # -3
+		printf("buf[101] point data: %d\n", buf[101]); // # 127
+		int a = 10;
+		printf("int a point address: %p\n", &a);	// stack #  0x7ffdf9e993b4
+		printf("int a datas: %d\n", a);	// # 10
+
+		int *p_test0;
+		printf("int*p_test point address: %p\n", p_test0); // stack # 0x7ffdf9e993f0
+		int *p_test1;
+		printf("int*p_test1 point address: %p\n", p_test1); // stack # 0x7ffdf9e993e0
+
+		int *p_test2;
+		printf("int*p_test2 point address: %p\n", p_test2); 
+		// # 0xf63d4e2e # this is a nochange sapce like the following 0x40038a
+		// If you put the code "int *p_test2" below the code"int *p", it will output [e3] at "printf("int*p data: 		  // %d\n", *p)"
+		// It is because [p_test2=0x40038a, p = 0xf63d4e2e], maybe you cannot access the address # 0xf63d4e2e
+		// So where is 0x40038a, p = 0xf63d4e2e, heap/stack/global I am not sure. Why can't I access the address #    		      // 0xf63d4e2e.
+		int *p;
+		printf("int*p point address: %p\n", p);	//  # 0x40038a ??? I am not sure if p in heap or stack, 
+							// since it never changes after I add several print buf.
+							// But the stack result like buf change every time I run.
+							// Or perhaps it randomly point to a fixed space for point initilize.
+							// For p_test0, p_test initialize, the result obvioulsly in stack,
+							// But for p_test2, result never fixed like p
+
+		printf("int*p data: %d\n", *p);	// stack # 1768709983
+		p = &a;
+		printf("p point address: %p\n", p); // stack #  0x7ffdf9e993b4
+		*p = 20;
+		printf("int*p 20 data: %d\n", *p);	// # 20
 
 		char *mp = get_mem(100);
-		strcpy(mp, "ABCDEFG"); // heap
+		printf("mp point address: %p\n", mp); // heap # 0x20bf010
+		strcpy(mp, "ABCDEFG");
+		printf("mp memory data: %d\n", *mp); // # 65
 
 		if (mp != NULL)
 		{
 			free(mp);
 			mp = NULL;
 		}
+		printf("mp after free: %p\n", mp); // # (nil)
 	}
+
+	```
+
 	```
 
 ###  [***Common Error & Solution***]
@@ -258,3 +299,9 @@ int main()
 **[s2]** 1.3.2  char* -> const char*
 
 [https://stackoverflow.com/questions/1524356/c-deprecated-conversion-from-string-constant-to-char](https://stackoverflow.com/questions/1524356/c-deprecated-conversion-from-string-constant-to-char)
+
+**[e3]** ```segmentation faul```
+
+**[s3]** 1.6.2 rearrange code, check if the pointer access unreadable memory 
+
+[https://stackoverflow.com/questions/2346806/what-is-a-segmentation-fault](https://stackoverflow.com/questions/2346806/what-is-a-segmentation-fault)
