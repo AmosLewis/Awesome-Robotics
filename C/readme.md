@@ -1,8 +1,12 @@
 # C review note
 
+This is advanced C. For base knowledge of C, I recommend read the following blog:
+
+[http://www.runoob.com/cprogramming/c-tutorial.html](http://www.runoob.com/cprogramming/c-tutorial.html).
+
 ### [***linux terminal compile and run***]
 ```
-new a firl called test.cpp: touch  test.cpp
+new a file called test.cpp: touch  test.cpp
 compile: gcc -o test test.cpp
 Run: ./test
 ```
@@ -32,7 +36,7 @@ int main()
 
 	- 1.1.2 Essence of data type： [**alias of fixed space of memory**]
 
-		- Function： **Compiler** precalculate space of memory to be alloc, but it has not alloc. Only when the **variable** be created will the memory be alloc.
+		- Function： **Compiler** pre-calculate space of memory to be alloced, but it has not alloc. Only when the **variable** be created will the memory be alloc.
 
 		```
 		int a = 10
