@@ -34,7 +34,7 @@ int main()
 }
 ```
 ### [***Knowledge Note***]
-- 1.1 Datatype
+- 1.1 Data Type
 
 	- 1.1.1 Classification of data type
 	
@@ -170,6 +170,11 @@ int main()
 			
 			- code: Store binary code of function.
 			
+- 1.4 Model of Function Callback
+
+
+- 1.5 Analyze of Varibale Transfer During Function Callback
+
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
