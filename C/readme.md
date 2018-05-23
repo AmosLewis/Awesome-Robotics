@@ -88,7 +88,7 @@ int main()
 
 	- 1.1.5 Void(Data Encapsulating: "nothing is impossible" type)
 
-		- void* as left value, can point to any type of data
+		- void* as left value, can point to any type of data(Think of void* is a base class, other is derived class)
 
 		```
 		void* memcpy( void* dest, const void* src, size_t len );
@@ -101,7 +101,10 @@ int main()
 		char* p2 = (char*)malloc(sizeof(char)*20)
 		```
 		
-		- void in function **pramater** and **return value**, means nothing.
+		- void in function **pramater** and **return value**, means nothing. 
+		
+			- If a function dosenot have  return value, it must be explicitly declared as void.Or C will automatically return int type.
+			- In C++ If a function dosenot have parameter, it must be explicitly declared as void. Or C++ will return "error: funciton dosed not take 1 parameters. " But C will tell you no problem. So for safety, explicitly declare void parameter.
 		```
 		int function(void)
 		{
@@ -242,21 +245,24 @@ int main()
 		printf("buf[99] point data: %d\n", buf[99]); // # -7
 		printf("buf[100] point data: %d\n", buf[100]); // # -3
 		printf("buf[101] point data: %d\n", buf[101]); // # 127
+		
 		int a = 10;
 		printf("int a point address: %p\n", &a);	// stack #  0x7ffdf9e993b4
 		printf("int a datas: %d\n", a);	// # 10
 
 		int *p_test0;
 		printf("int*p_test point address: %p\n", p_test0); // stack # 0x7ffdf9e993f0
+		
 		int *p_test1;
 		printf("int*p_test1 point address: %p\n", p_test1); // stack # 0x7ffdf9e993e0
 
 		int *p_test2;
 		printf("int*p_test2 point address: %p\n", p_test2); 
-		// # 0xf63d4e2e # this is a nochange sapce like the following 0x40038a
-		// If you put the code "int *p_test2" below the code"int *p", it will output [e3] at "printf("int*p data: 		  // %d\n", *p)"
-		// It is because [p_test2=0x40038a, p = 0xf63d4e2e], maybe you cannot access the address # 0xf63d4e2e
-		// So where is 0x40038a, p = 0xf63d4e2e, heap/stack/global I am not sure. Why can't I access the address #    		      // 0xf63d4e2e.
+			// # 0xf63d4e2e # this is a nochange sapce like the following 0x40038a
+			// If you put the code "int *p_test2" below the code"int *p", it will output [e3] at "printf("int*p data:  %d\n", *p)"
+			// It is because [p_test2=0x40038a, p = 0xf63d4e2e], maybe you cannot access the address # 0xf63d4e2e
+			// So where is 0x40038a, p = 0xf63d4e2e, heap/stack/global I am not sure. Why can't I access the address # 0xf63d4e2e.
+		
 		int *p;
 		printf("int*p point address: %p\n", p);	//  # 0x40038a ??? I am not sure if p in heap or stack, 
 							// since it never changes after I add several print buf.
@@ -266,8 +272,10 @@ int main()
 							// But for p_test2, result never fixed like p
 
 		printf("int*p data: %d\n", *p);	// stack # 1768709983
+		
 		p = &a;
 		printf("p point address: %p\n", p); // stack #  0x7ffdf9e993b4
+		
 		*p = 20;
 		printf("int*p 20 data: %d\n", *p);	// # 20
 
