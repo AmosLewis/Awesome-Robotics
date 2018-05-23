@@ -4,6 +4,12 @@ This is advanced C. For base knowledge of C, I recommend read the following blog
 
 [http://www.runoob.com/cprogramming/c-tutorial.html](http://www.runoob.com/cprogramming/c-tutorial.html).
 
+The recommend editor is [sublimetext3](https://www.sublimetext.com/3).
+
+The recommend platform is [linux ubuntu 14.04](http://releases.ubuntu.com/14.04/).
+
+All of the code in this page could be found in test.cpp. You could uncomment, then compile and run.
+
 ### [***linux terminal compile and run***]
 ```
 new a file called test.cpp: touch  test.cpp
