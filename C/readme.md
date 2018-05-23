@@ -171,9 +171,20 @@ int main()
 			- ***code***: Store binary code of function.
 			
 - 1.4 Model of Function Callback
+
 <img src = 'pic/Funtion_Callback_Model.png' width="800" height="300" />
 
 - 1.5 Analyze of Varibale Transfer During Function Callback
+
+	<img src = 'pic/variable_transfer.png' width="600" height="150" />
+
+	- 1. main could alloc on **stack/heap/global**, this variable could be used by func1 & func2;
+	
+	- 2. Memory on **stack** alloced by func2, could **not** be used by func1 & main;
+	
+	- 3. Memory on **heap** alloced by func2, could be used by func1 & main;
+	
+	- 4. Memory on **global** alloced by func2, could be used by func1 & main;
 
 
 ###  [***Common Error & Solution***]
