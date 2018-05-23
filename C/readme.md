@@ -41,6 +41,9 @@ int main()
 }
 ```
 ### [***Knowledge Note***]
+
+#### [***Chapter_One***] : 4_Region_of_Memory
+
 - 1.1 Data Type
 
 	- 1.1.1 Classification of data type
@@ -281,6 +284,18 @@ int main()
 		printf("mp after free: %p\n", mp); // # (nil)
 	}
 	```
+
+#### [***Chapter_Two***] : Pointer
+
+- 2.1 Advanced Pointer
+
+	- Advanced 1 : Pointer is a kind of **data type**.
+
+	- Advanced 2 : Indirect method of accessing variables (*p) is the biggest meaning of pointer.
+	
+	- Advanced 3 : Understanding of Pointer + 4 Region of Memory
+	
+	- Advanced 4 : Use of Pointer + Function callback (pointer as function parameters)
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
