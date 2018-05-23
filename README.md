@@ -7,7 +7,7 @@ I do this for reviewing what I have learned and filling the gap. And most import
 
 Feel free to contact me by chil1@alumni.cmu.edu. 
 
-This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie Xia](https://github.com/YoujieXia), [Jiangshan Tian](https://github.com/tianjiangshan). This reprosity will continues to be updated. If your want to contribute to this series repository, you could contact anyone of our awesome team.
+This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie Xia](https://github.com/YoujieXia), [Jiangshan Tian](https://github.com/tianjiangshan). This reprosity will continues to be updated. We believe in that robotic technology will make the world better. If you want to join us or contribute to this series repository, you could contact anyone of our awesome team. 
 
 
 
