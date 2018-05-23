@@ -314,6 +314,14 @@ int main()
 		- 5. C don't allow copy memory to NULL and unknow illegal address.
 
 	- Advanced 2 : (*p) Indirect method of accessing variables is the biggest meaning of pointer.
+
+		- 1. 3 steps for indirect assignment
+			```
+			int num = 0;
+			int *p = NULL;	// 1. set 2 variable
+			p = &num; 	// 2. set connect between them
+			*p = 2;	// 3. use * to assign value
+			```
 	
 	- Advanced 3 : Understanding of Pointer + 4 Region of Memory
 	
