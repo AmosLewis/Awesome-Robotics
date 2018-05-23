@@ -216,20 +216,20 @@ int main()
 	char *get_mem(int size)
 	{
 		char *p2 = NULL;
-		p2 = (char*)malloc(size);
+		p2 = (char*)malloc(size); // heap
 		return p2;
 	}
 
 	int main()
 	{
-		char buf[100];
-		int a = 10;
-		int *p;
-		p = &a;
-		*p = 20;
+		char buf[100]; // stack
+		int a = 10; // stack
+		int *p;	
+		p = &a;	
+		*p = 20; // stack
 
 		char *mp = get_mem(100);
-		strcpy(mp, "ABCDEFG");
+		strcpy(mp, "ABCDEFG"); // heap
 
 		if (mp != NULL)
 		{
