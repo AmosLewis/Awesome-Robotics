@@ -186,6 +186,22 @@ int main()
 	
 	- 4. Memory on **global** alloced by func2, could be used by func1 & main;
 
+- 1.6 Direction of stack and memory.
+
+```
+// 1.6 stack grow direction 
+int main(void)
+{
+	int a;
+	int b;
+	char buf[4];
+	printf("&a: %p\n", &a); // # &a: 0x7fff51f11eb8
+	printf("&b: %p\n", &b); // # &b: 0x7fff51f11ebc
+	printf("Address of buf : %p\n", &buf[0]); // # 0x7fff51f11ec0
+	printf("Address of buf+1: %p\n", &buf[1]);// # 0x7fff51f11ec1
+	return 0;
+}
+```
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
