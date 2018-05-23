@@ -107,11 +107,11 @@ int main()
 		
 		- 2. Computer system seperates C code into 4 region.
 		
-			- stack: Compiler **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
+			- stack: **Compiler** **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
 			```
 			char *getMem2()
 			{
-				char buf[64];	//  temporary variable
+				char buf[64];	//  temporary local variable in stack
 				strcpy(buf, "123456");
 				printf("buf: %s\n", buf); // # buf: 123456
 				return buf; // return the first address of memory block , not the 64 byte
@@ -131,6 +131,7 @@ int main()
 				}
 				return p1; // return head of memory block of num byte
 			}
+			// for test code, please check test.cpp 1.3.1
 			```
 			
 			- static: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
