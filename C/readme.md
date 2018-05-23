@@ -313,7 +313,7 @@ int main()
 			```
 		- 5. C don't allow copy memory to NULL and unknow illegal address.
 
-	- Advanced 2 : Indirect method of accessing variables (*p) is the biggest meaning of pointer.
+	- Advanced 2 : (*p) Indirect method of accessing variables is the biggest meaning of pointer.
 	
 	- Advanced 3 : Understanding of Pointer + 4 Region of Memory
 	
