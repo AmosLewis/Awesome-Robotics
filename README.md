@@ -34,3 +34,5 @@ This reprository will include:
 - Embedded System
 
 - Meachine Learning
+
+- Deep Reinforcement Learning
