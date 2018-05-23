@@ -1,14 +1,18 @@
 # C review note
 
-This is advanced C. For base knowledge of C, I recommend read the following blog:
+This is a page for advanced C. 
 
-[http://www.runoob.com/cprogramming/c-tutorial.html](http://www.runoob.com/cprogramming/c-tutorial.html).
+- For basic knowledge of C, I recommend read the following blog:
 
-The recommend editor is [sublimetext3](https://www.sublimetext.com/3).
+	[http://www.runoob.com/cprogramming/c-tutorial.html](http://www.runoob.com/cprogramming/c-tutorial.html).
 
-The recommend platform is [linux ubuntu 14.04](http://releases.ubuntu.com/14.04/).
+- The recommend editor is [sublimetext3](https://www.sublimetext.com/3). For use of sublime, please follow this blog [Sublime Text3 keyboard shortcuts summary](https://www.jianshu.com/p/d5441fb2ccae).
 
-All of the code in this page could be found in test.cpp. You could uncomment, then compile and run.
+- The recommend platform is [linux ubuntu 14.04](http://releases.ubuntu.com/14.04/).
+
+- For Mac, I recommend you install ubuntu by Parallels, you can follow this youtube video [Install Ubuntu on Mac with Parallels 10](https://www.youtube.com/watch?v=PApudf-ftkU).
+
+- All of the code in this page could be found in [test.cpp](test.cpp). You could uncomment, then compile and run.
 
 ### [***linux terminal compile and run***]
 ```
