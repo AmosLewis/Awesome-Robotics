@@ -13,7 +13,7 @@ This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie
 
 This reprository will include:
 
-- C
+- [C](/C)
 
 - C++
 
@@ -21,7 +21,7 @@ This reprository will include:
 
 - Computer Vision
 
-- SLAM
+- [SLAM](/SLAM)
 
 - Deep Learning
 
