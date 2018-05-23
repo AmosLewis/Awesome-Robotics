@@ -7,7 +7,7 @@ I do this for reviewing what I have learned and filling the gap. And most import
 
 Feel free to contact me by chil1@alumni.cmu.edu
 
-This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie Xia](https://github.com/YoujieXia), [jiangshan Tian](https://github.com/tianjiangshan). This reprosity will continues to be updated. 
+This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie Xia](https://github.com/YoujieXia), [Jiangshan Tian](https://github.com/tianjiangshan). This reprosity will continues to be updated. 
 
 
 
