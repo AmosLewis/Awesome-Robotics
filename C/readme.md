@@ -59,7 +59,7 @@ int main()
 
 
 		```
-		// note the %zu, should not be %d, or it will return e1;
+		// note the %zu, should not be %d, or it will return [e1];
 		printf("sizeof(a): %zu \n", sizeof(a))
 		```
 
@@ -154,6 +154,7 @@ int main()
 
 			```
 			//1.3.2 global 
+			// note should use const, or it will output warning/error [e2]
 			const char *getStr1()
 			{
 				const char *p1 = "abcdefg2";
@@ -171,8 +172,14 @@ int main()
 			
 
 ###  [***Common Error & Solution***]
-[e1] ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
+**[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
-[s1] 1.1.3  %d -> %zu
+**[s1]** 1.1.3  %d -> %zu
 
 [stackflow-d-expects-argument-of-type-int-but-argument-2-has-type-long-unsigned-int](https://stackoverflow.com/questions/21128092/d-expects-argument-of-type-int-but-argument-2-has-type-long-unsigned-int)
+
+**[e2]** ```warning:  deprecated conversion from string constant to ‘char*’ ```
+
+**[s2]** 1.3.2  char* -> const char*
+
+[https://stackoverflow.com/questions/1524356/c-deprecated-conversion-from-string-constant-to-char](https://stackoverflow.com/questions/1524356/c-deprecated-conversion-from-string-constant-to-char)
