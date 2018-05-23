@@ -1,4 +1,4 @@
-# Awsome-Robotic-content
+# Awsome-Robotic
 
 Robotic Learning Note
 
