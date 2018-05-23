@@ -200,7 +200,7 @@ int main()
 	<img src = 'pic/stack_grow_direction.png' width="500" height="300" /> 
 
 	```
-	// 1.6 stack grow direction 
+	// 1.6.1 stack_grow_direction 
 	int main(void)
 	{
 		int a;
@@ -217,11 +217,9 @@ int main()
 	```
 	
 	<img src = 'pic/stack_heap.png' width="500" height="300" /> 
-	
+
 	```
-	// 1.6 stack_heap practice
-	```
-	// 1.6.2 stack_heap practice
+	// 1.6.2 stack_heap_practice
 	char *get_mem(int size)
 	{
 		char *p2 = NULL;
@@ -282,9 +280,6 @@ int main()
 		}
 		printf("mp after free: %p\n", mp); // # (nil)
 	}
-
-	```
-
 	```
 
 ###  [***Common Error & Solution***]
