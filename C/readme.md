@@ -1,4 +1,4 @@
-# C review note
+# C review notes
 
 This is a page for advanced C. 
 
@@ -13,6 +13,13 @@ This is a page for advanced C.
 - For Mac, I recommend you install ubuntu by Parallels, you can follow this youtube video [Install Ubuntu on Mac with Parallels 10](https://www.youtube.com/watch?v=PApudf-ftkU).
 
 - All of the code in this page could be found in [test.cpp](test.cpp). You could uncomment, then compile and run.
+
+### Tutorials
+Here we recommend two tutorials for learning C programming language. Actually, the first one is a good start point for beginners. The book is about 200+ pages but is concise and clear. There are many code examples in C included by the second one. You may also refer to the [CMU 15-213](https://www.cs.cmu.edu/~213/).
+
+- Brian W. Kernighan and Dennis M. Ritchie, The C Programming Language, Second Edition, Prentice Hall, 1988
+
+- Randal E. Bryant and David R. O'Hallaron, Computer Systems: A Programmer's Perspective, Third Edition, Pearson, 2016 
 
 ### [***linux terminal compile and run***]
 ```
