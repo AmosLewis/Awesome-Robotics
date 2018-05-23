@@ -171,7 +171,7 @@ int main()
 			
 
 ###  [***Common Error & Solution***]
-[e1] ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’
+[e1] ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
 [s1] 1.1.3  %d -> %zu
 
