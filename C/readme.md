@@ -171,7 +171,7 @@ int main()
 			- code: Store binary code of function.
 			
 - 1.4 Model of Function Callback
-
+<img src = 'pic/Funtion_Callback_Model.png' width="800" height="300" />
 
 - 1.5 Analyze of Varibale Transfer During Function Callback
 
