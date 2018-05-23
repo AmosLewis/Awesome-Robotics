@@ -151,6 +151,21 @@ int main()
 			- static: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
 			
 			- const: Store string const and other const; **Computer System** will free at the end of program.
+
+			```
+			//1.3.2 global 
+			const char *getStr1()
+			{
+				const char *p1 = "abcdefg2";
+				return p1;
+			}
+			const char *getStr2()
+			{
+				const char *p2 = "abcdefg2";
+				return p2;
+			}
+			// for test code, please check test.cpp 1.3.2
+			```
 			
 			- code: Store binary code of function.
 			
