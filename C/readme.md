@@ -121,7 +121,7 @@ int main()
 		
 		- 2. Computer system seperates C code into 4 region.
 		
-			- stack: **Compiler** **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
+			- ***stack***: **Compiler** **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
 			```
 			char *getMem2()
 			{
@@ -132,7 +132,7 @@ int main()
 			}
 			```
 			
-			- heap: **Programmer** alloc and free(dynamic memory alloc and free); If Programmer not free, **Computer System** will free it at the end of program;
+			- ***heap***: **Programmer** alloc and free(dynamic memory alloc and free); If Programmer not free, **Computer System** will free it at the end of program;
 			
 			```
 			char *getMem(int num)
@@ -148,9 +148,9 @@ int main()
 			// for test code, please check test.cpp 1.3.1
 			```
 			
-			- static: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
+			- ***static***: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
 			
-			- const: Store string const and other const; **Computer System** will free at the end of program.
+			- ***const***: Store string const and other const; **Computer System** will free at the end of program.
 
 			```
 			//1.3.2 global 
@@ -168,7 +168,7 @@ int main()
 			// for test code, please check test.cpp 1.3.2
 			```
 			
-			- code: Store binary code of function.
+			- ***code***: Store binary code of function.
 			
 - 1.4 Model of Function Callback
 <img src = 'pic/Funtion_Callback_Model.png' width="800" height="300" />
