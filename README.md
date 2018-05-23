@@ -1,4 +1,4 @@
-# Awsome-Robotic
+# Awesome-Robotic
 
 Robotic Learning Note
 
