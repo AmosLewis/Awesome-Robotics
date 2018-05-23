@@ -10,6 +10,8 @@ Run: ./test
 ### C file format
 ```
 #include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 int main()
 {
     int a = 10;
@@ -101,13 +103,35 @@ int main()
 - 1.3 Model of Memory
 	- Work flow
 
-		- 1. Computer system load C code to memory.
+		- 1. Computer system loads C code to memory.
 		
-		- 2. Computer system seperate C code into 4 region.
+		- 2. Computer system seperates C code into 4 region.
 		
-			- stack: Compiler **automatically** alloc and free; Store **function paramerter** and **local variable**.
+			- stack: Compiler **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
+			```
+			char *getMem2()
+			{
+				char buf[64];	//  temporary variable
+				strcpy(buf, "123456");
+				printf("buf: %s\n", buf); // # buf: 123456
+				return buf; // return the first address of memory block , not the 64 byte
+			}
+			```
 			
 			- heap: **Programmer** alloc and free(dynamic memory alloc and free); If Programmer not free, **Computer System** will free it at the end of program;
+			
+			```
+			char *getMem(int num)
+			{
+				char *p1 = NULL;
+				p1 = (char*)malloc(sizeof(char)* num); // dynamic memory alloc in heap
+				if (p1 == NULL)
+				{
+					return NULL;
+				}
+				return p1; // return head of memory block of num byte
+			}
+			```
 			
 			- static: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
 			
