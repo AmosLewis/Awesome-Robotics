@@ -176,7 +176,7 @@ int main()
 
 - 1.5 Analyze of Varibale Transfer During Function Callback
 
-	<img src = 'pic/variable_transfer.png' width="600" height="150" />
+	<img src = 'pic/stack_heap_global.png' width="500" height="300" /> <img src = 'pic/variable_transfer.png' width="250" height="300" />
 
 	- 1. main could alloc on **stack/heap/global**, this variable could be used by func1 & func2;
 	
