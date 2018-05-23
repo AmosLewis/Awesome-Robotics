@@ -212,7 +212,31 @@ int main()
 	<img src = 'pic/stack_heap.png' width="500" height="300" /> 
 	
 	```
-	
+	// 1.6 stack_heap practice
+	char *get_mem(int size)
+	{
+		char *p2 = NULL;
+		p2 = (char*)malloc(size);
+		return p2;
+	}
+
+	int main()
+	{
+		char buf[100];
+		int a = 10;
+		int *p;
+		p = &a;
+		*p = 20;
+
+		char *mp = get_mem(100);
+		strcpy(mp, "ABCDEFG");
+
+		if (mp != NULL)
+		{
+			free(mp);
+			mp = NULL;
+		}
+	}
 	```
 
 ###  [***Common Error & Solution***]
