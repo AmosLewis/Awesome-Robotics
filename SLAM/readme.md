@@ -1,4 +1,5 @@
-Check [YoujieXia](https://github.com/YoujieXia/Awesome-SLAM) for more detail
+The following is a snapshot of another reprosity that maintained by us to collect the SLAM learning source.
+Check [YoujieXia-Awesome-SLAM](https://github.com/YoujieXia/Awesome-SLAM) for more detail. 
 
 # Awesome-SLAM
 Resources and Resource Collections of SLAM
