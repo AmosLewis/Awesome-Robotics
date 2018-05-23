@@ -188,20 +188,26 @@ int main()
 
 - 1.6 Direction of stack and memory.
 
-```
-// 1.6 stack grow direction 
-int main(void)
-{
-	int a;
-	int b;
-	char buf[4];
-	printf("&a: %p\n", &a); // # &a: 0x7fff51f11eb8
-	printf("&b: %p\n", &b); // # &b: 0x7fff51f11ebc
-	printf("Address of buf : %p\n", &buf[0]); // # 0x7fff51f11ec0
-	printf("Address of buf+1: %p\n", &buf[1]);// # 0x7fff51f11ec1
-	return 0;
-}
-```
+	- [stackflow-stack-address-grow-towards-decreasing-memory-addresses](https://stackoverflow.com/questions/4560720/why-does-the-stack-address-grow-towards-decreasing-memory-addresses)
+	
+	<img src = 'pic/stack_grow_direction.png' width="500" height="300" /> 
+
+	```
+	// 1.6 stack grow direction 
+	int main(void)
+	{
+		int a;
+		int b;
+		char buf[4];
+		printf("&a: %p\n", &a); // # &a: 0x7fff51f11eb8
+		printf("&b: %p\n", &b); // # &b: 0x7fff51f11ebc
+		printf("Address of buf : %p\n", &buf[0]); // # 0x7fff51f11ec0
+		printf("Address of buf+1: %p\n", &buf[1]);// # 0x7fff51f11ec1
+		return 0;
+	}
+	// 这里我测试的地址是 a低，b高，但a是先压栈的，b是后压栈的，如果按照栈从高地址开始的解释话，
+	// 就不对了，所以我电脑（macbook虚拟机Ubuntu14）上应该是栈也从低地址开始压，所以和内存生长是一个方向了？
+	```
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
