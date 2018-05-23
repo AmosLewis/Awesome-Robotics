@@ -1,10 +1,17 @@
 # Robotic
+
 Robotic Learning Note
+
 This is a summary of my 4 years Bachelor study of  Computer Science in NJUST and 2 years Master study of Robotics at CMU.
-I did this for reviewing what I have learned and filling the gap.
-I will start from c programming. This reprosity will continues to be updated. 
+I do this for reviewing what I have learned and filling the gap. And most importantly, helping young engineer who are interested in robotics to learn robotic technology quickly.
 
 Feel free to contact me by chil1@alumni.cmu.edu
+
+I will start from c programming. This reprosity will continues to be updated. 
+
+This repository is mantained by[Chi Liu](https://github.com/AmosLewis), [jiangshan Tian](https://github.com/tianjiangshan), [Youjie Xia](https://github.com/YoujieXia).
+
+
 
 This reprository will include:
 
@@ -18,12 +25,12 @@ This reprository will include:
 
 - SLAM
 
-- ROS
-
 - Deep Learning
+
+- ROS
 
 - CUDA Programming
 
 - Embedded System
 
-
+- Meachine Learning
