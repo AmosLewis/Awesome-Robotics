@@ -1,4 +1,4 @@
-# C review notes
+# Advanced C review notes
 
 This is a page for advanced C. 
 
@@ -290,6 +290,28 @@ int main()
 - 2.1 Advanced Pointer
 
 	- Advanced 1 : Pointer is a kind of **data type**.
+	
+		- 1. Pointer variable is a kind of variable, so it will occupy memory space to store memory address.
+		
+		- 2. *p manipulates memory.
+		
+			- During declaration, * used for decalaring a variable is a pointer. int *p;
+			
+			- During usage, * means the data in the paticular memory that the pointer points to. 
+			```	
+			*p = 10; // left of equal-sign , write memory
+			 a = *p; // right of equal-sign, read memory
+			```
+		
+		- 3. Make sure memory block that the pointer points to is revisable.
+		
+		- 4. The type of pointer is defined by the type of data in memory its points to.
+			```	
+			int a;
+			int *p = &a;
+			p++;	// the step is defined by the type of data, for example heres is int(2/4 byte).
+			```
+		- 5. C don't allow copy memory to NULL and unknow illegal address.
 
 	- Advanced 2 : Indirect method of accessing variables (*p) is the biggest meaning of pointer.
 	
