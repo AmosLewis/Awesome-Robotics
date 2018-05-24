@@ -373,6 +373,17 @@ int main()
 				printf("buf4[100]: %d \n", buf4[100]); // # 0
 			}
 			```
+		- Difference between char '\0', number 0, NULL, char '0';
+		
+			- 1. char '\0' is a char whose ASSCII encode value is 0. 
+			
+			- 2. char '\0' equals to number 0. '\' is escape char.
+			
+			- 3. NULL is a macro in (stdio.h) whose value is number 0 = char '\0'.
+			
+			- 4. char '0' is char whose content is '0' and ASSCII encode value is 48.
+			
+
 
 - 3.3 String as Function Parameter
 
