@@ -460,7 +460,7 @@ int main()
 	int **t = &p;		// second level
 	int ***m = &t;		// third level
 	```
-	- second level pointer as output
+	- Second level pointer as output
 	
 		Must use address transfer for **formal parameters** >>> **arguments**.
 		```
@@ -475,6 +475,7 @@ int main()
 		}
 		```
 	
+	- Second level pointer as input (3 kind of memory model)
 	
 
 ###  [***Common Error & Solution***]
