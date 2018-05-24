@@ -334,7 +334,46 @@ int main()
 	- Advanced 3 : Understanding of Pointer + 4 Region of Memory
 	
 	- Advanced 4 : Use of Pointer + Function callback (pointer as function parameters)
+	
+#### [***Chapter_Three***] : String
 
+- 3.1 Basic String Manipulation
+
+	- 3.1.1 String Initialize
+	
+		- Difference between **sizeof** and **strlen**
+
+			- **sizeof** is a operator, result fixed during compile; **strlen** is a function, result output at run time;
+
+			- For char array, **sizeof** include **'\0'**, **strlen** dosenot include **'\0'**. 
+
+
+			```
+			//3.1.1 init char array
+			int main(void)
+			{
+				// 1 Not assign lenth, Compiler will automatically calculate lenth
+				char buf1[] = {'a', 'b', 'c', 'd'};
+				// 2 assign lenth, buf[4-99] = '\0'
+				char buf2[200] = {'a', 'b', 'c', 'd'};
+				// char buf3[2]= {'a', 'b', 'c', 'd'};
+				// over lenth, Compiler error
+				printf("buf1: %s \n", buf1); // # abcd 
+				printf("buf2: %s \n", buf2); // # abcd 
+				printf("buf2: %d \n", buf2[88]); // # 0
+
+				// 3 use string to init, 
+				char buf3[] = "abcd";
+				// buf3 as char array with 5 byte
+				printf("buf3 length as string : %d \n", (int)strlen(buf3)); // # 4
+				// buf3 as string with 4 byte
+				printf("buf3 length as char array : %d \n", (int)sizeof(buf3)); // # 5
+
+				char buf4[128] = "abcd";
+				printf("buf4[100]: %d \n", buf4[100]); // # 0
+			}
+			```
+		
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
