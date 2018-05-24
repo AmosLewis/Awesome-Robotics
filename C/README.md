@@ -161,9 +161,9 @@ int main()
 			// for test code, please check test.cpp 1.3.1
 			```
 			
-			- ***static***: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
+			- ***static in global region***: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
 			
-			- ***const***: Store string const and other const; **Computer System** will free at the end of program.
+			- ***const in global region***: Store string const and other const; **Computer System** will free at the end of program.
 
 			```
 			//1.3.2 global 
@@ -489,6 +489,13 @@ int main()
 			char *myArray[] ={"aaaa", "cccc"}; // myArray is an array in stack, ang every element is char*
 			char **p = myArray; 		   // myArray[] = *myArray
 			```
+			
+			- Obviously, for pointer array, it allocate memory in stack for pointer and use this pointers in pointer array to point to the const memory in global memory region which has allocated by compiler before.
+			- You cannot actually sort the data in global memory region, you can only change their pointer value in stack. So if you want to sort this array, what you will do is change the pointer value.
+			```
+			void sortMyArray(char **myArray, int num);
+			```
+			
 
 		- 2. Two dimentional array
 		
@@ -518,32 +525,46 @@ int main()
 			```
 			- Don't use char **buf  as formal parameter for two dimention array, use char buf[10][30].
 				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.
+			
+			- If you want to sort this array, you actually sort their string value , which is not like 1rd method that just change their pointer.
+			
+				```
+				void sortMyArray(char myArray[10][30], int num);
+				```
+			
+			- Obviously, this kind of pointer easy to lead to stack overflow because it allocate memory for string value not string's pointer in stack. So for big array, use the 3rd methods to allocate memory in heap.
+			
+			
 		- 3. Dynamicly allocate memory 
 		
-		<img src = 'pic/dynamic_allocate_pointer.jpg' width="500" height="200" /> 
-		
-		```
-		int b[3];
-		int *q = (int*) malloc(3 * sizeof(int)); // equal to 9[3]
+			<img src = 'pic/dynamic_allocate_pointer.jpg' width="500" height="200" /> 
 
-		int n =3;
-		char **buf = (char **)malloc(3 * sizeof(char*));// equal to char *buf[3]
-		printf("&buf: %p \n", &buf);						// stack # 0x7ffe0a65df30  
-		printf("buf: %p \n", buf);							// heap # 0x1693030 
-		for (int i = 0; i < n; i++)
-		{
-			buf[i] = (char*)malloc(30 * sizeof(char));
-			printf("&buf[%d]: %p \n", i, &buf[i]);			// heap # 0x1693030 0x1693038 0x1693040
-			printf("buf[%d]: %p \n", i, buf[i]);			// heap # 0x1693050 0x1693080 0x16930b0
-		}
-		// buf in stack; char* in heap; char in heap
+			```
+			int b[3];
+			int *q = (int*) malloc(3 * sizeof(int)); // equal to 9[3]
 
-		char **myArray = NULL;
-		printf("&myArray: %p \n", &myArray); 				// stack # 0x7ffe0a65df40 
+			int n =3;
+			char **buf = (char **)malloc(3 * sizeof(char*));// equal to char *buf[3]
+			printf("&buf: %p \n", &buf);						// stack # 0x7ffe0a65df30  
+			printf("buf: %p \n", buf);							// heap # 0x1693030 
+			for (int i = 0; i < n; i++)
+			{
+				buf[i] = (char*)malloc(30 * sizeof(char));
+				printf("&buf[%d]: %p \n", i, &buf[i]);			// heap # 0x1693030 0x1693038 0x1693040
+				printf("buf[%d]: %p \n", i, buf[i]);			// heap # 0x1693050 0x1693080 0x16930b0
+			}
+			// buf in stack; char* in heap; char in heap
 
-		```
-		  
+			char **myArray = NULL;
+			printf("&myArray: %p \n", &myArray); 				// stack # 0x7ffe0a65df40 
+			```
 			
+			- Sort is the same as 1rd method
+			```
+			void sortMyArray(char **myArray, int num);
+			```
+
+		  
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
