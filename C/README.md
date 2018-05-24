@@ -478,6 +478,16 @@ int main()
 	- Second level pointer as input (3 kind of memory model)
 
 		The most important thing of second level pointer is step. Sometimes different second pointer point to same address, but their steps vary from the way determining them.
+		
+		- pointer array
+		
+			- Conclusion, if your want to use second pointer to point to a list of strings in global region,your must determine an pointer array first. Then use the second pointer to point to the pointer array.
+			```
+			// char **p ={"aaaa", "cccc"}; // error scalar object ‘p’ requires one element in initializer
+			char *myArray[] ={"aaaa", "cccc"}; // myArray is an array in stack, ang every element is char*
+			char **p = myArray; 		   // myArray[] = *myArray
+			```
+
 	
 
 ###  [***Common Error & Solution***]
