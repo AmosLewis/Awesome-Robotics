@@ -479,7 +479,7 @@ int main()
 
 		The most important thing of second level pointer is step. Sometimes different second pointer point to same address, but their steps vary from the way determining them.
 		
-		- pointer array
+		- 1. Pointer array
 		
 			- Conclusion, if your want to use second pointer to point to a list of strings in global region,your must determine an pointer array first. Then use the second pointer to point to the pointer array.
 			```
@@ -488,7 +488,31 @@ int main()
 			char **p = myArray; 		   // myArray[] = *myArray
 			```
 
-	
+		- 2. Two dimentional array
+		
+			- Two dimention array must be initlize with value.
+			```
+			// char a[][30]; // # error storage size of ‘a’ isn’t known
+			char a[10][30] = {"aaa","bbb", "ccc", "111"};
+			```
+			- Step in array
+			```
+			// &a = a = &a[0] but there step vary
+			printf("&a: %p \n", &a);		// # 0x7ffded01e0a0 
+			printf("a: %p \n", a);			// # 0x7ffded01e0a0 
+			printf("&a[0]: %p \n", &a[0]);	// # 0x7ffded01e0a0 
+			printf("&a[0][0]: %p \n", &a[0][0]);	// # 0x7ffded01e0a0 
+			printf("a[0][0]: %c \n", a[0][0]);      // a
+			// &a + 1 = &1 + 30*4 byte
+			printf("&a+1: %p \n", &a+1);	        // # 0x7ffded01e1cc  
+			// a+1 = a + 30 byte
+			printf("a+1: %p \n", a+1);		// # 0x7ffded01e0be  
+			// (&a[0])++ = a + 1 byte
+			printf("a[0]+1: %p \n", a[0]+1);// # 0x7ffded01e0a1
+			// a[0][0]+1 = ASSCI(a) + 1 = b 
+			printf("a[0][0]+1: %c \n", a[0][0]+1);  // b
+			```
+			
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
