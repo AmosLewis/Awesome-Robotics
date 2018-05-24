@@ -507,22 +507,48 @@ int main()
 			char a[10][30] = {"aaa","bbb", "ccc", "111"};
 			```
 			- Step in array
-			```
-			// &a = a = &a[0] but there step vary
-			printf("&a: %p \n", &a);		// # 0x7ffded01e0a0 
-			printf("a: %p \n", a);			// # 0x7ffded01e0a0 
-			printf("&a[0]: %p \n", &a[0]);	// # 0x7ffded01e0a0 
-			printf("&a[0][0]: %p \n", &a[0][0]);	// # 0x7ffded01e0a0 
-			printf("a[0][0]: %c \n", a[0][0]);      // a
-			// &a + 1 = &1 + 30*4 byte
-			printf("&a+1: %p \n", &a+1);	        // # 0x7ffded01e1cc  
-			// a+1 = a + 30 byte
-			printf("a+1: %p \n", a+1);		// # 0x7ffded01e0be  
-			// (&a[0])++ = a + 1 byte
-			printf("a[0]+1: %p \n", a[0]+1);// # 0x7ffded01e0a1
-			// a[0][0]+1 = ASSCI(a) + 1 = b 
-			printf("a[0][0]+1: %c \n", a[0][0]+1);  // b
-			```
+			
+				&a = a = &a[0] but their steps vary with each other
+				```
+				printf("&a: %p \n", &a);		// # 0x7ffded01e0a0 
+				```
+				
+				- a is the address of first item"aaa", not the address of the 2-d array
+				```
+				printf("a: %p \n", a);			// # 0x7ffded01e0a0
+				```
+				
+				- &a is the address of the 2-d array
+				```
+				printf("&a[0]: %p \n", &a[0]);	// # 0x7ffded01e0a0 
+				```
+				
+				- &a[0][0] is the address of the 1st item of 1-d array which is the 1st item of the 2-d array
+				```
+				printf("&a[0][0]: %p \n", &a[0][0]);	// # 0x7ffded01e0a0 
+				printf("a[0][0]: %c \n", a[0][0]);      // a
+				```
+				
+				- &a + 1 = &a + 30*4 byte
+				```
+				printf("&a+1: %p \n", &a+1);	        // # 0x7ffded01e1cc  
+				```
+				
+				- a+1 = a + 30 byte
+				```
+				printf("a+1: %p \n", a+1);		// # 0x7ffded01e0be  
+				```
+				
+				- (&a[0])++ = a + 1 byte
+				```
+				printf("a[0]+1: %p \n", a[0]+1);// # 0x7ffded01e0a1
+				```
+				
+				- a[0][0]+1 = ASSCI(a) + 1 = b 
+				```
+				printf("a[0][0]+1: %c \n", a[0][0]+1);  // b
+				```
+				
 			- Don't use char **buf  as formal parameter for two dimention array, use char buf[10][30].
 				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.
 			
@@ -600,8 +626,29 @@ int main()
 	
 	```
 	typedef int MYARRAY[5]; == typedef int (MYARRAY)[5]; // define a new type
-	int array[5]; == MYARRAY array;		             // define a variable
+	int array[5]; == MYARRAY array;		             // define a variable it is an array_pointer
 	```
+
+- Pointer array and array pointer
+
+	The difference between the definition of them is just an (parantehsis) on ***name**.
+	
+	Remember the later of their name is the significance.
+
+	- Pointer **array** (4.2.3.1)
+	
+		An array with many pointer items in it.
+		```
+		char *pointer_array[4];
+		```
+		
+	- Array **pointer**
+		
+		A pointer points to an array with fixed type.
+		```
+		int (*array_pointer)[4]; An pointer points to a memory whose data type is int[4]
+		```
+
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
