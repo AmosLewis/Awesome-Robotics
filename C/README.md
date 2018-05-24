@@ -481,7 +481,7 @@ int main()
 		
 		- 1. Pointer array
 		
-			- Conclusion, if your want to use second pointer to point to a list of strings in global region,your must determine an pointer array first. Then use the second pointer to point to the pointer array.
+			- Conclusion, if your want to use second pointer to point to a list of strings in global region, your must define an pointer array first. Then use the second pointer to point to the pointer array.
 			```
 			// char **p ={"aaaa", "cccc"}; // error scalar object ‘p’ requires one element in initializer
 			char *myArray[] ={"aaaa", "cccc"}; // myArray is an array in stack, ang every element is char*
