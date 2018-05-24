@@ -476,6 +476,8 @@ int main()
 		```
 	
 	- Second level pointer as input (3 kind of memory model)
+
+		The most important thing of second level pointer is step. Sometimes different second pointer point to same address, but their steps vary from the way determining them.
 	
 
 ###  [***Common Error & Solution***]
