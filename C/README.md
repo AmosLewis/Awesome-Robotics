@@ -626,7 +626,7 @@ int main()
 	
 	```
 	typedef int MYARRAY[5]; == typedef int (MYARRAY)[5]; // define a new type
-	int array[5]; == MYARRAY array;		             // define a variable it is an array_pointer
+	int array[5]; == MYARRAY array;		             // define a variable it is an array
 	```
 
 - Pointer array and array pointer
@@ -644,10 +644,27 @@ int main()
 		
 	- Array **pointer**
 		
-		A pointer points to an array with fixed type.
-		```
-		int (*array_pointer)[4]; An pointer points to a memory whose data type is int[4]
-		```
+		A pointer points to an array with fixed type. There are 3 ways to define an array pointer.
+		
+		- 1st Directly
+			```
+			int (*array_pointer)[4]; An pointer points to a memory whose data type is int[4]
+			```
+			
+		- 2ed By array type
+			```
+			typedef int(MYARRAY)[5];
+			MYARRAY *array_pointer;
+			```
+			
+		- 3rd By array pointer type
+			```
+			typedef int(*MYARRAY)[5];
+			MYARRAY array_pointer;
+			```
+			
+		If we have an ```int a[10];```
+		then we can define by ```array_pointer = &a;```
 
 
 ###  [***Common Error & Solution***]
