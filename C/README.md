@@ -514,6 +514,21 @@ int main()
 			```
 			- Don't use char **buf  as formal parameter for two dimention array, use char buf[10][30].
 				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.
+		- 3. Dynamicly allocate memory 
+		```
+		int b[3];
+		int *q = (int*) malloc(3 * sizeof(int)); // equal to a[3]
+
+		int n =3;
+		char **buf = (char **)malloc(3 * sizeof(char*));// equal to char *buf[3]
+		for (i = 0; i < n; i++)
+		{
+			buf[i] = (char*)malloc(30 * sizeof(char));
+		}
+		// buf in stack; char* in heap; char in heap
+
+		char **myArray = NULL;
+		```
 			
 
 ###  [***Common Error & Solution***]
