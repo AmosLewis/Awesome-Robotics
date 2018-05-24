@@ -512,6 +512,8 @@ int main()
 			// a[0][0]+1 = ASSCI(a) + 1 = b 
 			printf("a[0][0]+1: %c \n", a[0][0]+1);  // b
 			```
+			- Don't use char **buf  as formal parameter for two dimention array, use char buf[10][30].
+				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.
 			
 
 ###  [***Common Error & Solution***]
