@@ -451,6 +451,32 @@ int main()
 			
 			read only, both pointer and memory cannot change
 
+- Multi-level Pointer
+
+	- How to define appropriate pointer variable
+	```
+	int b;
+	int *p = &b;		// first level
+	int **t = &p;		// second level
+	int ***m = &t;		// third level
+	```
+	- second level pointer as output
+	
+		Must use address transfer for **formal parameters** >>> **arguments**.
+		```
+		char *p1 = NULL;		// Doesnot alloc memory
+		int len = 0;
+		getMem(&p1, &len);		//  Must use address transfer for formal parameters >>> arguments.
+		
+		void getMem(char **p1 /*out*/, int *plen/*int*/)
+		{
+			*p1 = malloc(100);	// Indirect assignment is the biggest meaning of pointer
+			*plen = 100
+		}
+		```
+	
+	
+
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
