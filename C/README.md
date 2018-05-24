@@ -373,7 +373,42 @@ int main()
 				printf("buf4[100]: %d \n", buf4[100]); // # 0
 			}
 			```
-		
+
+- 3.3 String as Function Parameter
+
+	- copy string, remember add '\0'
+	```
+	int main(void)
+	{
+		char a[] = "I am a student";
+		char b[64];
+		int i = 0;
+		for ( i =0; *(a+i)!='\0'; i++)
+		{
+			*(b+i) = *(a+i);
+		}
+		b[i] = '\0'; // important
+		printf("a:%s \n", a);
+		printf("b:%s \n", b);
+	}
+	```
+	- Donnot change formal parameters, add an temporary parameter to replace formal parameter
+	```
+	int copy_str6(char *from, char* to)
+	{
+		char *tmpfrom = from;
+		char *tmpto = to;
+		if ( from == NULL | to == NULL)
+		{
+			return -1;
+		}
+
+		while(*tmpto++ = *tmpto++);
+		printf("from:%s\n", from);
+		return 0;
+	}
+	```
+
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
