@@ -420,6 +420,37 @@ int main()
 	}
 	```
 
+#### [***Chapter_Four***] : Pointer
+
+- Const
+	
+	- const declare the variable as readonly
+	
+		```
+		char buf[100] = "abcdef"
+		```
+		- const char *p = buf
+		
+			same as char *p = "abcdef"， is literal constant 
+		
+		- char const *p = buf
+			
+			pointer can redirect, but memory cannot change
+			```
+			p = '123456'; // ok
+			```
+		
+		- char * const p = buf
+		
+			pointer cannot redirect, but memory can change
+			```
+			p[0] = '1';
+			```
+		
+		- const char const *p = buf
+			
+			read only, both pointer and memory cannot change
+
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
