@@ -481,6 +481,8 @@ int main()
 		
 		- 1. Pointer array
 		
+			<img src = 'pic/pointer_array.jpg' width="500" height="200" />
+		
 			- Conclusion, if your want to use second pointer to point to a list of strings in global region, your must define an pointer array first. Then use the second pointer to point to the pointer array.
 			```
 			// char **p ={"aaaa", "cccc"}; // error scalar object ‘p’ requires one element in initializer
@@ -490,6 +492,8 @@ int main()
 
 		- 2. Two dimentional array
 		
+			<img src = 'pic/2_dimentional_array.jpg' width="500" height="200" />
+			
 			- Two dimention array must be initlize with value.
 			```
 			// char a[][30]; // # error storage size of ‘a’ isn’t known
@@ -515,20 +519,30 @@ int main()
 			- Don't use char **buf  as formal parameter for two dimention array, use char buf[10][30].
 				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.
 		- 3. Dynamicly allocate memory 
+		
+		<img src = 'pic/dynamic_allocate_pointer.jpg' width="500" height="200" /> 
+		
 		```
 		int b[3];
-		int *q = (int*) malloc(3 * sizeof(int)); // equal to a[3]
+		int *q = (int*) malloc(3 * sizeof(int)); // equal to 9[3]
 
 		int n =3;
 		char **buf = (char **)malloc(3 * sizeof(char*));// equal to char *buf[3]
-		for (i = 0; i < n; i++)
+		printf("&buf: %p \n", &buf);						// stack # 0x7ffe0a65df30  
+		printf("buf: %p \n", buf);							// heap # 0x1693030 
+		for (int i = 0; i < n; i++)
 		{
 			buf[i] = (char*)malloc(30 * sizeof(char));
+			printf("&buf[%d]: %p \n", i, &buf[i]);			// heap # 0x1693030 0x1693038 0x1693040
+			printf("buf[%d]: %p \n", i, buf[i]);			// heap # 0x1693050 0x1693080 0x16930b0
 		}
 		// buf in stack; char* in heap; char in heap
 
 		char **myArray = NULL;
+		printf("&myArray: %p \n", &myArray); 				// stack # 0x7ffe0a65df40 
+
 		```
+		  
 			
 
 ###  [***Common Error & Solution***]
