@@ -564,7 +564,44 @@ int main()
 			void sortMyArray(char **myArray, int num);
 			```
 
-		  
+#### [***Chapter_Five***] : Multi-dimentional Array	
+
+- Basic
+	- Notion of array
+	
+		- item: an ordered set with variables of same type.
+		
+		- memory: a big continuous memory region.
+		
+	- 2-D array
+	
+		There is no direct type of multi-dimentional array in C. The 2-D array is a special 1-d array that is defined by a nested syntax.
+		
+		- Definition
+			```
+			int a[3][4];
+			```
+		
+		- Name of array
+			
+			Name of array is the address of the first item in array. It is a **const value**. 
+			
+			So, once you define the name, you cannot change. For variable is alias of memory. Once the array is defined, the memory is fixed.
+			
+			The address of first item of array = the address of array (check it in 4.2.2)
+			
+- Type of array
+
+	The type of array is determined by item type and size of array. 
+	
+	typeof(int array[5]) == **int[5]**
+	
+	You could define your own array **type** by typedef.
+	
+	```
+	typedef int MYARRAY[5]; == typedef int (MYARRAY)[5]; // define a new type
+	int array[5]; == MYARRAY array;		             // define a variable
+	```
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
