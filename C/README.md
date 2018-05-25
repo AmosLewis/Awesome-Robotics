@@ -420,7 +420,7 @@ int main()
 	}
 	```
 
-#### [***Chapter_Four***] : Pointer
+#### [***Chapter_Four***] : Pointer more and more
 
 - Const
 	
@@ -479,7 +479,9 @@ int main()
 
 		The most important thing of second level pointer is step. Sometimes different second pointer point to same address, but their steps vary from the way determining them.
 		
-		- 1. Pointer array
+		- 1. Pointer **array**
+		
+			- Actually it is the **array** that matter compared with the **array pointer** who emphasizes pointer. Check more detail in 5.3
 		
 			<img src = 'pic/pointer_array.jpg' width="500" height="200" />
 		
@@ -496,6 +498,20 @@ int main()
 			void sortMyArray(char **myArray, int num);
 			```
 			
+			- Pointer array as formal parameter
+			```
+			void fun(char **str[]);
+			void fun(char **str);	// str[]->*str
+			```
+			
+			- Pointer array in main
+			```
+			int main(int argc, char *argv[])
+			
+			: demo.exe a b test
+			int argc = 4
+			char *argv[] = {"demo.exe", "a", "b", "test"}
+			```
 
 		- 2. Two dimentional array
 		
@@ -639,7 +655,7 @@ int main()
 	
 		An array with many pointer items in it.
 		```
-		char *pointer_array[4];
+		char *pointer_array[4];	// 4 means there is 4 pointers in the array in stack. 4 could be removed as you can add manin pointers as you can to stack like main(int argc, char *argv[]) does.
 		```
 		
 	- Array **pointer**
@@ -683,7 +699,7 @@ int main()
 			```
 			void print_array(int a [3][5]);	// step = 5 * sizeof(int)
 			void print_array(int a [][5]);
-			void print_array(int (*a)[5]);
+			void print_array(int (*a)[5]);	// array pointer
 			```
 
 ###  [***Common Error & Solution***]
