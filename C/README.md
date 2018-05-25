@@ -712,6 +712,106 @@ int main()
 	
 		When deal with a[5], C doesnot care what is in a, and it dose not know 5 is 5. Its only care about &a[0]: the address of first element.
 
+
+#### [***Chapter_Six***] : Struct
+
+- Definition and type of struct
+
+	struct is an kind of constructed data type. It is used to combine different data type together in order to build our own data type.
+	
+	- Declaration of struct
+	
+		```
+		struct Teacher
+		{
+			char name[32];
+			int age;
+		};
+		```
+		
+		Remember **;**
+		
+		***struct Teacher*** is a type not just Teacher.
+		
+		But you could use typedef to rename struct Teacher as Teacher.
+				```
+		typedef struct Teacher
+		{
+			char name[32];
+			int age;
+		} Teacher;
+		```
+		
+		
+	- 3 ways of definition and intilization of struct variable
+	
+		- First struct type, then struct variable
+			```
+			struct Teacher a = {"Lili", 22};
+			```
+		
+		- struct type, then struct variable
+			```
+			struct Teacher
+			{
+				char name[32];
+				int age;
+			}c = {"Lili", 22};
+			```
+		
+		- not struct type , directly struct variable
+			```
+			struct
+			{
+				char name[32];
+				int age;
+			}e = {"Lili", 22};
+			```
+			
+	- Manipulation of struct
+	
+		- variable, use .
+			```
+			struct Stu h;
+			strcpy(h.name, "Amos");
+			(&h)->name
+			```
+		
+		- pointer, use ->
+			```
+			struct Stu h;
+			strcpy(p->name, "abc");
+			(*p).name
+			```
+			
+	- Struct array
+		```
+		Teacher t1[2] = 
+		{
+			{"Lili", "teacher"},
+			{"Lilei", "teacher"}
+		};
+		Teacher t1[2] = {"Lili", 18, "Lilei", 22};
+		```
+		
+	-  Struct with pointer
+		```
+		typedef stuct Teacher
+		{
+			char *name;
+			char **stu;
+			int age;
+		} Teacher;
+		```
+		
+	- Value assigment for struct
+		Teacher t2 = e;
+		
+	- Deep copy and swallow copy
+		
+	
+
+
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
 
