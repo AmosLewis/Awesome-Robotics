@@ -690,6 +690,12 @@ int main()
 
 	 - 1-D array as function formal parameter degrate to 1st level pointer.
 	 
+		```
+		void print_array(int arr[10]);	// 10 could be erase. 10 elements in the 1-D array.
+		void print_array(int arr[]);
+		void print_array(int* arr);	// 1st level pointer
+		```
+	 
 	 - 2-D array as function formal parameter degrate to array pointer.
 	 
 	 	- 3 mode for M-D array as formal parameter
@@ -699,8 +705,12 @@ int main()
 			```
 			void print_array(int a [3][5]);	// step = 5 * sizeof(int)
 			void print_array(int a [][5]);
-			void print_array(int (*a)[5]);	// array pointer
+			void print_array(int (*a)[5]); // array pointer
 			```
+			
+	- The reason for degration
+	
+		When deal with a[5], C doesnot care what is in a, and it dose not know 5 is 5. Its only care about &a[0]: the address of first element.
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
