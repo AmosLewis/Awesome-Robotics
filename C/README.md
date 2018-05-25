@@ -830,7 +830,16 @@ int main()
 		
 		```
 		
-	
+	- Memory alignment
+		```
+		#pragma pack(XX)
+		#pragma pack(1)	// 1 byte alignment
+		#pragma pack(2)	// 2 byte alignment
+		#pragma pack(4)	// 4 byte alignment
+		```
+###  [***Chapter Seven***] : File
+
+
 
 
 ###  [***Common Error & Solution***]
