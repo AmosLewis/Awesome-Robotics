@@ -666,6 +666,9 @@ int main()
 		If we have an ```int a[10];```
 		then we can define by ```array_pointer = &a;```
 
+- Memory of Multy-dimention Array
+
+	<img src = 'pic/int_a35.png'  />
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
