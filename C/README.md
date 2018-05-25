@@ -691,7 +691,7 @@ int main()
 	 - 1-D array as function formal parameter degrate to 1st level pointer.
 	 
 		```
-		void print_array(int arr[10]);	// 10 could be erase. 10 elements in the 1-D array.
+		void print_array(int arr[10]);	// 10 could be erase because the step is always 1. 10 elements in the 1-D array.
 		void print_array(int arr[]);
 		void print_array(int* arr);	// 1st level pointer
 		```
