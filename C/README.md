@@ -618,14 +618,14 @@ int main()
 			
 - Type of array
 
-	The type of array is determined by item type and size of array. 
+	The type of array is determined by item type and number of item in array. 
 	
 	typeof(int array[5]) == **int[5]**
 	
 	You could define your own array **type** by typedef.
 	
 	```
-	typedef int MYARRAY[5]; == typedef int (MYARRAY)[5]; // define a new type
+	typedef int MYARRAY[5]; == typedef int (MYARRAY)[5]; // define a new type MARRAY as int[5]
 	int array[5]; == MYARRAY array;		             // define a variable it is an array
 	```
 
@@ -648,7 +648,7 @@ int main()
 		
 		- 1st Directly
 			```
-			int (*array_pointer)[4]; An pointer points to a memory whose data type is int[4]
+			int (*array_pointer)[4]; An pointer points to a memory for a array whose type is int[4], which means there is 4 int item in the array.
 			```
 			
 		- 2ed By array type
@@ -666,9 +666,25 @@ int main()
 		If we have an ```int a[10];```
 		then we can define by ```array_pointer = &a;```
 
-- Memory of Multy-dimention Array
+- Essence of Multy-dimention Array
 
 	<img src = 'pic/int_a35.png'  />
+	
+- Degration of M-D array
+
+	 - 1-D array as function formal parameter degrate to 1st level pointer.
+	 
+	 - 2-D array as function formal parameter degrate to array pointer.
+	 
+	 	- 3 mode for M-D array as formal parameter
+	 
+			Second bracket must be filled. means step for a. a+1 = a+step
+
+			```
+			void print_array(int a [3][5]);	// step = 5 * sizeof(int)
+			void print_array(int a [][5]);
+			void print_array(int (*a)[5]);
+			```
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
