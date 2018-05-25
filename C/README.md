@@ -808,6 +808,27 @@ int main()
 		Teacher t2 = e;
 		
 	- Deep copy and swallow copy
+	
+		struct with point + dynamic memory alloc
+		
+		```
+		typedef stuct Teacher
+		{
+			char *name;
+			int age;
+		} Teacher;
+		Teacher t1, t2;
+		t1.name = (char*)malloc(30);
+		strcpy(t1.name, "Lili");
+		t1.age = 22
+		
+		// swallow copy, different struct pointer variable points to the same memory.
+		t2 = t1;
+		// deep copy, you alloc a new memory by hand for the new pointer
+		t2.name = (char *)malloc(30);
+		strcpy(t2.name, t1.name)
+		
+		```
 		
 	
 
