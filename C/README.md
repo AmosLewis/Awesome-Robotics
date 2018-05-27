@@ -837,9 +837,46 @@ int main()
 		#pragma pack(2)	// 2 byte alignment
 		#pragma pack(4)	// 4 byte alignment
 		```
+
+
 ###  [***Chapter Seven***] : File
 
+- Open and Write of standard file
+	
+	- FILE
+			
+		FILE is a standard C struct define by C for file. It include some brief information for the file.
+		
+	- fopen()
+		```
+		fopen(char *filename, char *type);
+		```
 
+		- fopen will return a pointer to a file if it success; return NULL if faile.
+		
+		```
+		FILE *fp
+
+		if((fp = fopen("test", "w"))==NULL)
+		{
+			printf("File cannot be open\n");
+			exit();
+		}
+		else
+		{
+			printf("File open sucessfully");
+		}
+
+		fclose(fp);
+		```
+
+		- There are 3 default file pointer in C;
+		
+			- stdin: standard input from keyboard; You can use **scanf**, **getchar**;
+
+			- stdout: standard output to screen. You can use **printf**, **puts**;
+			
+			- stderr: standard error output to screen. You can use **perror**
 
 
 ###  [***Common Error & Solution***]
