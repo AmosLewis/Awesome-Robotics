@@ -969,10 +969,124 @@ int main()
 			```
 			
 		- Read binary file
+		
+			- fread() fwrite()
 			```
-			size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);	// return value: number of read/write log, return value == nmemb when sucessfully
+			// readn size*nmemb byte file.
+			// return value: number of read/write log, return value == nmemb when sucessfully
+			// return value < nmemb when not enough file to read.
+			// return value = 0 when at the end of file or reading error
+			size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);	
+			// return value < nmemb when write error
 			size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
 			```
+			
+			- example of fwrite(), fread
+			```
+			#include <stdio.h>
+			#include <stdlib.h>
+			
+			struct record{
+				char name[10];
+				int age;
+			}
+			int main(void)
+			{
+				struct record array[2] = {{"ken", 24}, {"Knuth", 28}};
+				
+				FILE *fp = fopen("recfile", "w");
+				
+				if(!fp == NULL)
+				{
+					printf("open file recfile");
+					eixt(1);
+				}
+				fwrite(array, sizeof(struct record), 2, fp);
+				fclose(fp);
+				
+				FILE *fp1 = fopen("recfile", "r"); 
+				struct record array1[2]
+				if(!fp == NULL)
+				{
+					printf("open file recfile");
+					eixt(1);
+				}
+				fread(array1, sizeof(struct record), 2, fp1);
+				printf("Name: %s\t Age1:%d\n", array1[0].name, array1[0].age);
+				printf("Name2: %s\t Age2:%d\n", array1[1].name, array1[1].age);
+				fclode(p);
+				return 0;
+			}
+			```
+			
+		- clear set buffer
+			```
+			int fflush(FILE *stream);
+			```
+			
+			clear buffer that pointed by stream; Usually used to clear buffer when you finish writing some data.
+			
+		- Randomly read and write file
+			```
+			#include <stdio.h>
+			// sucess return value == 0; fail return value == -1 and set errno
+			int fseek(FILE *stream, long offset, int whence);
+			long ftell(FILE *stream);
+			void rewind(FILE *stream);
+			```
+			
+			- wherece:
+			
+				- SEEK_SET: move offset byte from the head of file
+				
+				- SEEK_CUR: move offset byte from current postition of file
+				
+				- SEEK_END: move offset byte from the end of file. Expand the size of file and fill in with 0.
+				
+			```
+			FILE *fp;
+			if ( (fp = fopen("textfile", "r+")) == NULL )
+			{
+				printf("seek file textfile\n");
+				exit(1);
+			}
+			if ( fseek(fp, 10, SEEK_SET) !=0)
+			{
+				printf("seek file\n");
+				exit(1);
+			}
+			fputc('K', fp);
+			fclose(fp);
+			```
+				
+		
+###  [***Chapter EIGHT***] : Linked List
+
+- Concept of linked list
+
+	- struct 
+		
+		- struct cannot definied included in a struct. But you can use stuct pointer to pointer in a struct.
+			```
+			typedef struct Teacher
+			{
+				char name[64];
+				int id;
+				struct Teacher *teacher;
+			} teacher_t;
+			```
+	- data field and pointer field
+		```
+		typedef struct node* link;
+		struct node{
+			unsigned char item;	// data field
+			link next;		// pointer field
+		};
+		```
+	
+- Classification
+
+	- Dynamic and static link
 			
 
 ###  [***Common Error & Solution***]
