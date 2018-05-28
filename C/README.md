@@ -1342,6 +1342,28 @@ int main()
 		return 0;
 	}
 	```
+	
+- Pointer function and function pointer
+
+	- Pointer function
+	
+		function whose return values is pointer
+		```
+		int *a(intx, inty);
+		```
+	
+	- Function pointer
+		
+		funtion name is funtion pointer; during compiling, function will be allocate an address for enter the function, this is the fucnction pointer;
+		```
+		int c;
+		int max(int x, int y);
+		c = max(a,b);
+		
+		int (*p)(int,int);
+		p = max;
+		c = p(a,b);
+		```
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
