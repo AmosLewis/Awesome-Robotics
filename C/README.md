@@ -968,6 +968,12 @@ int main()
 			//	     That's good news
 			```
 			
+		- Read binary file
+			```
+			size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);	// return value: number of read/write log, return value == nmemb when sucessfully
+			size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
+			```
+			
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
