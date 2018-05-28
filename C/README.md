@@ -1531,25 +1531,68 @@ int main()
 		- _TIME_ 	// compile time of source code
 		
 
-###  [***Chapter Ten***] : Dynamic Library
-	
+###  [***Chapter Ten***] : Dynamic Library (in WIN32)
+
+- Brief
+
 	- xxx.lib: compile code, need to link this file
-	
+
 	- xxx.dll: running code, need to link this file
 	
-	- Define
+- Define
 		
-		- In DLL code
-			```
-			_declspec(dllexport) int MyFunction(int n);
-			```
+	- In DLL code
+		```
+		_declspec(dllexport) int MyFunction(int n);
+		```
+
+	- In App
+		```
+		_declspec(dllimport) int MyFunction(int n);
+		```
 			
-		- In App
-			```
-			_declspec(dllimport) int MyFunction(int n);
-			```
-			
-	- 
+- Link with DLL module
+
+	- explicitly
+	
+		in win32, used LoadLibary, LoadLibary will return HINSTANCE parameter, APP can use GetProcAddress to use this parameters. GerProcAddress will turn it into internel DLL address. For example:
+		
+		- DLL file
+		```
+		extern"C" _declspec(dllexport) double SquareRoot(double d);
+		```
+		
+		- APP
+		```
+		typedef double(SQRTPROC)(double);
+		HINSTANCE hInstance;
+		SQRTPROC* pFunction;
+		
+		VERIFY(hInstance=::LoadLibrary("c:\\winnt\\system32\\mydll.dll"));
+		VERIFY(pFunction=(SQRTPROC*)::GetProcAddress(hInstance, "SquareRoot"));
+		
+		doubel d = (*pFunction)(81.0);
+		```
+		
+		- Different from implicitly way, programmer can decide load which DLL file into memory.
+	
+	- implicitly
+		
+		- When you create a DLL file, linker will automatically output an **LIB** file for import it. This LIB file include name and flag of DLL export function. It is a replacement for DLL file that would be compiler into App.
+		
+		- All DLL file will load into memory during running.
+		
+- DLLMain
+
+	DLLMain is default entrance for DLL module. If programmer doesnot edit an DLLMain function, system will import an DLLMain fucntion in other DLL that does nothin. DLLMain will be callback when thread start and terminate.
+	
+- HINSTANCE
+
+	Every DLL module in process is identified by HINSTANCE(32 byte, global unique). In Win32, HINSTANCE == HMODULE
+
+	
+
+
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
