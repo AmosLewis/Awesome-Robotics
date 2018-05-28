@@ -1531,7 +1531,7 @@ int main()
 		- _TIME_ 	// compile time of source code
 		
 
-###  [***Chapter Ten***] : Dynamic Library (in WIN32)
+###  [***Chapter Ten***] : Dynamic Library (in Win32)
 
 - Brief
 
@@ -1590,7 +1590,136 @@ int main()
 
 	Every DLL module in process is identified by HINSTANCE(32 byte, global unique). In Win32, HINSTANCE == HMODULE
 
+
+###  [***Chapter ELEVEN***] : Useful Tools 
+
+- Windows
+	- MemWatch
+
+		It is a useful opensource tools for check memory error in C. Here is the [demo link](https://github.com/jedp/node-memwatch-demo)
+		
+- Linux 
 	
+	The following is 3 useful opensource tools for check memory error in C in Linux.
+	
+	- mtrace
+	
+		The most simplest and easiest way of the three tools. Here is the link of [demo](http://manpages.ubuntu.com/manpages/artful/man3/mtrace.3.html). It is C function that defined in <mcheck.h>
+			```
+			void mtrace(void);
+			```
+		
+		- Before call mtrace, your should first set MALLOC_TRACE so that system can find record of malloc/free.
+			```
+			#include <stdlib.h>
+			setenv("MALLOC_TRACE", "output_file_name", 1);
+			```
+			
+		- Example
+			```
+			#include <stdio.h>
+			#include <stdlib.h>
+			#include <errno.h>
+			#include <mcheck.h>
+
+			int main() 
+			{   
+			    char *hello;
+
+			    setenv("MALLOC_TRACE", "output", 1);
+			    mtrace();
+
+			    if ((hello = (char *) malloc(sizeof(char))) == NULL) {  
+				perror("Cannot allocate memory.");
+				return -1;
+			    }
+
+			   return 0;
+			}
+			```
+			
+			After compiler and link, you clould use the following command.
+				```
+				mtrace you_binary_name mtrace_output_file_name
+				```
+				
+			the content in mtrace_output_file_name is 
+				```
+				    - 0x08049670 Free 3 was never alloc'd 0x42029acc
+				    - 0x080496f0 Free 4 was never alloc'd 0x420dc9e9
+				    - 0x08049708 Free 5 was never alloc'd 0x420dc9f1
+				    - 0x08049628 Free 6 was never alloc'd 0x42113a22
+				    - 0x08049640 Free 7 was never alloc'd 0x42113a52
+				    - 0x08049658 Free 8 was never alloc'd 0x42113a96
+
+				    Memory not freed:
+				    -----------------
+				       Address     Size     Caller
+				    0x08049a90      0x1  at 0x80483fe
+				```
+	
+	- dmalloc
+	
+	- memwatch
+	
+		- You donot need to install memwatch. You can just add an file memwatch.h. When you compile, use
+			```
+			gcc - DMEMWATCH -DMW_STDIO test.c memwatch.c -p test
+			```
+			
+		- The output file is memwatch.log. During running time, the error hint will print in stdout. If memwatch.log cannot be edit, memwatch will try to write memwatchNN.log, NN is 01-99.
+		
+		- Example
+			```
+			#include <stdio.h>
+			#include <stdlib.h>
+			#include <errno.h>
+			#include <memwatch.h>
+
+			int main() 
+			{    
+				char *hello;
+
+			    setenv("MALLOC_TRACE", "output", 1);
+			    mtrace();
+			    if ((hello = (char *) malloc(sizeof(char))) == NULL) {
+				perror("Cannot allocate memory.");
+				return -1;
+			    }
+
+			    return 0;
+			}
+			```
+			
+			- Then you can compile by this command:
+				```
+				gcc -DMEMWATCH -DMW_STDIO test.c memwatch.c -o test
+				```
+				
+			- The output file include:
+				```
+				    ============= MEMWATCH 2.71 Copyright (C) 1992-1999 Johan Lindh =============
+
+				    Started at Mon May 26 19:48:47 2018
+
+				    Modes: __STDC__ 32-bit mwDWORD==(unsigned long)
+				    mwROUNDALLOC==4 sizeof(mwData)==32 mwDataSize==32
+
+
+				    Stopped at Sat Jun 26 22:48:47 2004
+
+				    unfreed: <1> test.c(9), 1 bytes at 0x805108c  {FE .. .. .. .. .. .. .. .. .. .. .. .. .. .. .. .}
+
+				    Memory usage statistics (global):
+				     N)umber of allocations made: 1
+				     L)argest memory usage      : 1
+				     T)otal of all alloc() calls: 1
+				     U)nfreed bytes totals      : 1
+				```
+				
+			- Disadvantages: Slow down the speed program
+			
+			- Advantages: mimic memory insufficient by **mwLinit(long num_of_byte)**.
 
 
 
