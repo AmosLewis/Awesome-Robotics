@@ -846,6 +846,10 @@ int main()
 	- FILE
 			
 		FILE is a standard C struct define by C for file. It include some brief information for the file.
+		```
+		#include <stdio.h>
+		FILE *fp;
+		```
 		
 	- fopen()
 		```
@@ -855,8 +859,6 @@ int main()
 		- fopen will return a pointer to a file if it success; return NULL if faile.
 		
 		```
-		FILE *fp
-
 		if((fp = fopen("test", "w"))==NULL)
 		{
 			printf("File cannot be open\n");
@@ -877,7 +879,95 @@ int main()
 			- stdout: standard output to screen. You can use **printf**, **puts**;
 			
 			- stderr: standard error output to screen. You can use **perror**
-
+	- fclose()
+		```
+		int fclose(FILE* stream);
+		```
+		
+		If it close a file sucessfully it will return 0; it not 0; Everytime will complete manipulation on a file, we **must** close it or the change will store in buff not on memory. Usually we can test if a file is closed sucessfully by these way:
+		```
+		if(fclose(fp)!=0)
+		{
+			printf("FILE cannot be closed");
+			exit(1);
+		}
+		else
+		{
+			printf("File is now closed");
+		}
+		```
+		
+	- File read and open
+	
+		- Read char in file, one time one char
+			```
+			int fgetc(FILE *stream); // char = fget(fp); if the end of file(flag "EOF"), return '-1'
+			int fputc(int ch, FILE* stream);
+			
+			int getc(FILE *stream);
+			int putc(int ch, FILE *stream);
+			```
+			
+			- Check end of file for deciding if continue certain operation on file
+			```
+			char ch;
+			if(fp = fopen("myfile.txt", "r")==NULL)
+			{
+				printf("file cannot be openned");
+				exit(-1);
+			}
+			while(ch=fget(fp)!=EOF)
+			{
+				fputc(ch, stdout);	// write ch into stdout and output to screen
+			}
+			
+			fclose(fp);
+			return 0;
+			```
+			
+		- Read string in file
+			```
+			char *fgets(char *string; int n; FILE *stream);	// read n-1 chars into string 
+			int fprintf(FILE *stream, char *format, ...);
+			int fputs( char*string, FILE *stream);
+			```
+			
+			- fgets(), feof(), ferror
+			```
+			fgets(buffer, 9, fp); // read 8 chars into buffer in fp; buffer could be in stack or heap(malloc)
+				// fgets will stop when meet '\n' whatever the number and add a '\0' at the end of buffer
+		     	        // retun a pointer to the string
+			        // return NULL if at the end of file of error
+			
+			
+			char str[128];
+			while(!feof(fo))
+			{
+				if(fgets(str, 128, fp)!=NULL)
+				{
+					printf("%s", str);
+				}
+			}
+			```
+			
+			- fputs()
+			```
+			fputs("Your score if TOFELS is", fp); // write string into fp
+			fputs(":", fp);
+			```
+			
+			-  fprintf()
+			
+				same as printf(). printf() to screen, fprintf() to file
+			```
+			int i = 67;
+			char *s="That is a good news";
+			fprintf(fp, "%d\n", i)
+			fprintf(fp,"%s", s);
+			// out put : Your score of TOEFL is: 617
+			//	     That's good news
+			```
+			
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
