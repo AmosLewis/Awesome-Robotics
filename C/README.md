@@ -1398,9 +1398,158 @@ int main()
 
 	- Concept of preprocess
 	
+		- process of C: preprocess, compile, assembly, link
 		
+			preprocessor will segment or precess the source code into a certain sign for further compile.
+			
+		- preprocess commend
+			
+			- #include
+			
+			- #define
+			
+			- #if #endif ..
+			
+			- some pre-define marco
+			
+- #include file process
+
+	- Difference between #include <> and #include ""
 		
+		- ""  **first** find file in the current directory, **then** according to system directory. Usually used for file that include library function.
 		
+		- <> **directly** find file according to system directory. Usually used for file that include self definied function.
+		
+- Macro
+
+	- concept of macro
+	
+		- C allows the marco to replace specified information. marco could with/without parameters.
+		
+		- marco with parameters
+		
+			```
+			#define marco_name string
+			#define PI 3.14
+			```
+			
+			- Captical
+			
+			- no ;
+			
+			- effective range is current file
+			
+			- #undef to terminal marco effective range
+			
+			- could use another macro
+			
+			- no gramma check
+			
+		- macro with parameters
+		
+			```
+			#define Marco(formal arguments list) string
+			#define S(a,b) a*b
+				....
+			Area = S(3,2);
+			```
+		
+- #if
+
+	- concept
+	
+		if you want to compile specified line of source code which satisfied certain conditions
+		```
+		# ifdef FLAG
+			source code segment1
+		# else
+			source code segment2
+		#endif
+		
+		# ifndef FLAG
+			source code segment1
+		# else
+			source code segment2
+		#endif
+		
+		# if EXPRESSION
+			source code segment1
+		# else
+			source code segment2
+		#endif
+		```
+		
+	- Effect of #if
+		
+		- Avoid reinlude of head file
+			```
+			#ifndef _SOMEFILE_H
+			#define _SOMEFILE_H
+			
+			#endif
+			```
+			
+		-  software crop
+			```
+			#include <stdio.h>
+			#include <stdlib.h>
+
+			#define BIG 1
+			int main(void)
+			{
+				char str[20] = "C Language";
+				char C;
+				int i = 0;
+				while ((C = str[i++]) != '\0')
+				{
+			#if  BIG
+					if (C >= 'a' && C <= 'z')
+						C = C - 32;
+			#else
+					if (C >= 'A'&& C <= 'Z')
+						C = C + 32;
+			#endif
+					printf("%c", C);
+				}
+
+				system("pause");
+
+				return 0;
+			}
+			```
+			
+	- Special macro
+	
+		These macro could be used directly in your code.
+	
+		- _FILE_	 // source code name that inlude macro
+		
+		- _LINE_	 // line number of macro
+		
+		- _DATE_ 	// compile date of source code
+		
+		- _TIME_ 	// compile time of source code
+		
+
+###  [***Chapter Ten***] : Dynamic Library
+	
+	- xxx.lib: compile code, need to link this file
+	
+	- xxx.dll: running code, need to link this file
+	
+	- Define
+		
+		- In DLL code
+			```
+			_declspec(dllexport) int MyFunction(int n);
+			```
+			
+		- In App
+			```
+			_declspec(dllimport) int MyFunction(int n);
+			```
+			
+	- 
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
