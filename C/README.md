@@ -1086,8 +1086,262 @@ int main()
 	
 - Classification
 
-	- Dynamic and static link
-			
+	- Dynamic link and static link
+	
+		- dynamic link: nodes are created from 0 during running time of program.
+		
+		- static link: nodes are defined in program, not create temporarily, cannot release after used
+		
+	- Link with/without head
+	
+	- Singly linked list / Doubly linked list / Cicle linked list
+	
+- Manipulation of linked list
+		
+	```
+	typedef struct Node
+	{
+		int id;			// data field
+		struct Node *next;	// pointer field
+	}SLIST;				// rename the struct node
+
+	// create a node
+	SLIST *SListCreat() 
+	{
+		SLIST *pCur = NULL;		//current node
+		SLIST *pHead = NULL;		// head node
+		SLIST *pNew = NULL;		// new node
+
+		// the head node, only used for flag, not for store data
+		pHead = (SLIST *)malloc(sizeof(SLIST));
+		if (pHead == NULL)
+		{
+			return NULL;
+		}
+
+		// assign data for member variable
+		pHead->id = -1;
+		pHead->next = NULL;
+
+		// store current node
+		// give the address of the one that pointer points
+		pCur = pHead;
+
+		int data;
+
+		// create node in loop
+		// data is got by keyboard
+		// -1 means end of the data input
+		while (1)
+		{
+			printf("Please input data：");
+			scanf("%d", &data); 
+
+			if (data == -1)
+			{
+				break;
+			}
+
+			// allocate new space for new node
+			pNew = (SLIST *)malloc(sizeof(SLIST));
+			if (pNew == NULL)
+			{ // if not sucess, step out this turn of loop
+				continue;
+			}
+
+			// assign value
+			pNew->id = data;
+			pNew->next = NULL;
+			// points to new node
+			pCur->next = pNew;
+
+			// new node point to NULL 
+			pNew->next = NULL;
+
+			pCur = pNew;
+		}
+
+
+		// return the head address of the node
+		return pHead;
+	}
+
+	// iterate over node
+	// output data field for sigle direction linked list
+	int SListPrint(SLIST *pHead)
+	{
+		if (pHead == NULL)
+		{
+			return -1;
+		}
+
+		// save the next node for heap
+		// since none data in head node
+		SLIST *pCur = pHead->next;
+
+		printf("head -> ");
+		while (pCur != NULL)
+		{
+			printf("%d -> ", pCur->id);
+
+			// move forward the pointer for current node
+			pCur = pCur->next;
+		}
+		printf("NULL\n");
+
+		return 0;
+	}
+
+	// insert y before node with data == x
+	// insert at the end of list if x not exist
+	int SListNodeInsert(SLIST *pHead, int x, int y)
+	{
+		if (pHead == NULL)
+		{
+			return -1;
+		}
+
+		SLIST *pPre = pHead;		// previously node
+		SLIST *pCur = pHead->next;	// current node
+		SLIST *pNew = NULL;         // new node
+
+		while (pCur != NULL)
+		{
+			if (pCur->id == x)
+			{
+				break;
+			}
+
+			// save current node
+			pPre = pCur;
+
+			// move forward current pointer
+			pCur = pCur->next;
+		}
+
+		// here are two situations
+		//1. Have found x, pCur= current node, pPre= previous node
+			// action: insert y node before x node
+		//2. Haven't found x, pPre= last node, pCur= NULL
+			// action: insert at the end of list
+
+		//allocate new memory for new node
+		pNew = (SLIST *)malloc(sizeof(SLIST));
+		if (pNew == NULL)
+		{
+			return -2;
+		}
+
+		//assign value for member variable of pNew
+		pNew->id = y;
+		pNew->next = NULL;
+
+		//pPre points to pNew
+		pPre->next = pNew;
+
+		//pNew next points to pCur
+		pNew->next = pCur;
+
+		return 0;
+	}
+
+	// delete the first x node
+	int SListNodeDel(SLIST *pHead, int x)
+	{
+		if (pHead == NULL)
+		{
+			return -1;
+		}
+
+		SLIST *pPre = pHead;		// previous node
+		SLIST *pCur = pHead->next;	// current node
+		int flag = 0; // 0 means no x; 1 means x node exist
+
+
+		while (pCur != NULL)
+		{
+			if (pCur->id == x)
+			{
+				// previous node pointer to the next node of current node
+				pPre->next = pCur->next;
+
+				free(pCur);
+				pCur = NULL;
+
+				// flag 1 means found x node
+				flag = 1;
+				break;
+			}
+
+			// save current node
+			pPre = pCur;
+			// move forward current pointer
+			pCur = pCur->next;
+		}
+
+
+		if (flag == 0)
+		{ //1 exist 1 node
+			printf("Does not found the %d node\n", x);
+			return -2;
+		}
+
+		return 0;
+	}
+
+	// free all node
+	int SListDestroy(SLIST *pHead)
+	{
+		if (pHead == NULL)
+		{
+			return -1;
+		}
+
+		SLIST *pTmp = NULL;	// temporary node used for destroy
+
+		while (pHead != NULL)
+		{
+			pTmp = pHead;
+
+			// move forward head
+			pHead = pHead->next;
+
+			free(pTmp);
+			pTmp = NULL;
+
+		}
+
+		return 0;
+	}
+
+	int main()
+	{
+		SLIST *pHead = NULL;
+
+		pHead = SListCreat(); // create node
+		printf("\nafter create node\n");
+		SListPrint(pHead); //iterate all node
+
+
+		SListNodeInsert(pHead, 4, 3);//add 4 after 3
+		printf("\nadd 4 after 3\n");
+		SListPrint(pHead); //iterate all node
+
+
+		SListNodeDel(pHead,  4);//delete first 4 node
+		printf("\ndelete first 4 node\n");
+		SListPrint(pHead); //iterate all node
+
+
+		SListDestroy(pHead);//destroy all node
+		pHead = NULL;
+		SListPrint(pHead); //iterate all node
+
+		printf("\n");
+		system("pause");
+		return 0;
+	}
+	```
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
