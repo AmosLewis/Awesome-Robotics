@@ -1364,6 +1364,43 @@ int main()
 		p = max;
 		c = p(a,b);
 		```
+		
+	- Callback function
+	
+		Function pointer as formal parameters in another function
+		- write an function A with function pointer as formal arguments 
+		```
+		int funcA(int a, int(*Pcall)(int b));
+		```
+		
+		- the real argument of the previous function pointer
+		```
+		int funcB(int c);
+		```
+		
+		- Callback
+		```
+		funcA(36, funcB);
+		```
+		
+	- Alias of function
+		
+		```
+		typedef int(*pCall)(int b);	// rename int(*)(int b) as pCall
+		
+		pCall pCallA;			// define a function pointer
+		int funcA(int a, pCallA);	// like step 1 in Callback function
+		```
+		
+###  [***Chapter NIGHT***] : Preprocess
+
+- Preprocess
+
+	- Concept of preprocess
+	
+		
+		
+		
 
 ###  [***Common Error & Solution***]
 **[e1]** ``` ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ ```
