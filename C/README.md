@@ -183,6 +183,29 @@ int main()
 			
 			- ***code***: Store binary code of function.
 			
+		- 3. extern
+		
+			- If you want to call a global variable that declared in other file.  You can use extern.
+				```
+				file1.h
+				int i = 3;
+				int fun1(void)
+				{
+					printf("hi");
+					return 0;
+				}
+				```
+				
+				```
+				file2.cpp
+				extern int i;
+				extern int fun1(void);
+				```
+				
+			- The difference between #include and extern is that extern save a lot of time during preprocess.
+			
+			- extern can also be used when C++ want to tell linker to use function define in C code.
+			
 - 1.4 Model of Function Callback
 
 <img src = 'pic/Funtion_Callback_Model.png' width="800" height="300" />
