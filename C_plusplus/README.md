@@ -209,10 +209,52 @@
                                              // int tmp = 3; const int &m = tmp
                     int &m = 3;           // error,  because  constant 3 does not have memory address
                     ```
+        
+  - inline function
+  
+     - inline in C++ is a replacement for macro in C. macro in C is processed during preprocess period, just simply replace code, so there is no check on gramma and  meaning error.
      
+     - Concept
      
-     
-     
+          - inline is real embedded in code
+          ```
+          inline void func(int a)
+          {
+               a = 20;
+               cout<<a<<endl;
+          }
+          int main(void)
+          {
+               func(10);
+               /*
+               // the compiler will stretch the func(10) like this
+               {
+                    a = 20;
+                    cout<<a<<endl;
+               }
+               */
+          }
+          ```
+               
+          - **inline** declaration and definition at the same time, same place.
+
+          - call inline function just simply replace function like macro, without other expense(push stack, jump, return etc.). This is the only difference between inline and normal function. **More space for less time**
+
+          - processed by compilier, so we can test error
+
+          - no loop, no too much if, not so big(usually < 10 line), no get address operation(&),  declaration must before call.
+
+- inline and macro
+
+     ```
+     #define SQR(x) ((x)*(x))
+
+     #inline int sqr(int x)
+     {
+          return x*x;
+     }
+     ```
+
      
      
      
