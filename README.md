@@ -15,7 +15,7 @@ This reprository will include:
 
 - [C](/C)
 
-- C++
+- [C++](/C_plusplus)
 
 - Cloud Computing
 
