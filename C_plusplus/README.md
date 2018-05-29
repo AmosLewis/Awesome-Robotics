@@ -94,8 +94,121 @@
      
           - Type& name <===> Type* const name
           
-          - const pointer as the inner implementation of reference. Reference and pointer have the same size of memory. They all have own memory sapce.
-     
+          - const pointer is the inner implementation of reference. So reference and pointer have the same size of memory. They all have own memory sapce.
+          
+          - Reference use **indirectly assignment**. Indirectly assignment: 
+               
+               - step1. Definie two variable(formal/real argument).
+               
+               - step2. Build relationship, formal = &real.
+               
+               - step3. Change *formal to change value of real.
+               
+               - Reference combine step2/3, C++ compiler helps us complete &real and *formal.
+               
+          - Reference as return value can be as left value.
+          
+               - Return stack(local) variable:  should not be as left value. But compiler only give you an warning when you return local variable.
+                    ```
+                    int& getA2()   // warning: reference to local variable 'a' return
+                    {
+                         int a;
+                         a = 10;
+                         return a;
+                    }
+                    int a1 = getA2();    // 10 value copy
+                    int &a2 = getA2()    // 32535 stack reference, memory illegal
+                    ```
+               
+               - Return static/global variable: can be as left/right value.
+                    ```
+                    int& getA2()   // no warning
+                    {
+                         static int a;
+                         a = 10;
+                         return a;
+                    }
+                    int a1 = getA2();    // a1 =10 value copy
+                    int &a2 = getA2()    // a2 =10 local reference, memory legal
+                    getA2() = 20;        // a2 =20
+                    ```
+          
+         - Pointer Reference
+         
+              - 2nd level pointer
+                    ```
+                    void getTeacher1(Teacher **p)
+                    {
+                         Teacher *tmp = NULL;
+                         tmp = (Teacher *)malloc(sizeof(Teacher));
+                         tmp -> age = 33;
+                         *p = tmp;
+                         // skip some NULL check
+                    }
+                    ```
+                    
+              - pointer reference
+                    ```
+                    void getTeacher2(Teacher* &myp)
+                    {
+                         myp = (Teacher *)malloc(sizeof(Teacher));
+                         myp->age = 33;
+                         // skip some NULL check
+                    }
+                    ```
+                    
+                    main
+                    ```
+                    Teacher *pT1 = NULL;
+                    getTeacher1(&pT1);       // 2nd level pointer
+                    getTeacher1(pT1);        // reference
+                    ```
+                    
+          - const reference
+          
+               - const object must use const reference. Or compiler error.
+                    ```
+                    const int a = 1;
+                    
+                    const int &b = a;
+                    int &b = a;    // error, must use const reference
+                    ```
+                
+               - const reference can be initialized by relative type. Biggest difference from normal reference(without const).
+                    ```
+                    const int &a =1;
+                    
+                    double x = 3.14;
+                    const int &b = x;
+                    ```
+                    
+               - Purpose of const: forbid change object by changing its reference
+                    ```
+                    int a = 1;
+                    const int &b = a;
+                    b = 12;        // error, b read only 
+                    ```
+               - implementation of const reference
+               
+                    const int &b == const int *const b;      // const int* pointer that points to const b. 
+                    int &b == int *const b                   // int* pointer that points to const b. 
+                    ```
+                    double a = 3.14;
+                    const int &b = a;   // b = 3 read only, cannot change
+                    double &c = a;      // c = 3.14
+                    val = 4.14          // c = 4.14, b = 3
+                    ```
+                    for const int&b = a, actually in C++ it is implemented by:
+                    ```
+                    int temp =a;
+                    const int &b = temp;     // so when you change b, you change temp, no a
+                    ```
+                    So C++ will allocate memory for const reference, but no allocate memory for normal reference
+                    ```
+                    const int &m = 3;     // sucess and read only, because
+                                             // int tmp = 3; const int &m = tmp
+                    int &m = 3;           // error,  because  constant 3 does not have memory address
+                    ```
      
      
      
