@@ -384,11 +384,11 @@ g++ c_pp.cpp -o c_pp
           
       - access properity
       
-          - **public**(default for struct): both outer and inner can access
+          - **public**(default for struct): both outer and inner can access.friend can access.
           
-          - **protected**: outer function cannot access, inner function can access.
+          - **protected**: outer function cannot access, inner function can access. Derive can access.friend can access.
           
-          - **private**(default for class): outer function cannot access, inner function can access.
+          - **private**(default for class): outer function cannot access, inner function can access. Derive cannot access.friend can access.
           
       - Object-oriented and Process-oriented
           
@@ -926,19 +926,116 @@ g++ c_pp.cpp -o c_pp
      
           - Typically when you use **new**, you must yous **delete** to free the memory on heap. But with auto_ptr, you don't need to use **delete**.
 
-          - auto_ptr ( not in C++11)
+          - auto_ptr ( replaced by unique_ptr in C++11)
+          
+          - unique_ptr
           
           - shared_ptr
           
           - weak_ptr
+
+#### [***Chapter_Five***]:Inheritance == Derivation
+
+- Relationship between class
+     
+     - AB-has-A
+     
+     - aB-use-A
+     
+     - AA-is-A: Inheritance
+     
+          - A new class(derive/child) get properity from old class(base/father).
           
-          - unique_ptr
+- Inheritance
 
+     - Format
+     ```
+     class Derive:public/private/protected Base
+     {
+          Derive_member_declaration;
+     }
+     ```
+     
+     - single inheritance/ multiple inheritance
+     
+     - Access control
+     
+          - protected member in Base can be access by Derive; For outer function, protected = privated.
+          
+          - private member in Base cannot be access by Derive;
+          
+     - Inheritance properity
+     
+          - public inheritance: **public/protected** member in Base ==> **public/protected** member in Derive; private member in Base cannot be accessed by Derive;(Outer/Derive can access)
+          
+          - protected inheritance: **public/protected** member in Base ==> **protected** member in Derive; private member in Base cannot be accessed by Derive;(Derive can access)
 
+          - private inheritance: **public/protected** member in Base ==> **private** member in Derive; private member in Base cannot be accessed by Derive;(seldom use)(Only self can access)
+          
+     - Construct and destruct in inheritance
+     
+          - Compatibility
+          
+               - Inheritance doesnot inherit construct and destruct function.
+               
+               - Derive is a special Base
+                    ```
+                    Derive derive;
+                    Base *p = &derive;
+                    Base base = derive;
+                    ```
+          - Construct/Destruct in Derive should use construct/destruct in Base.
+          ```
+          Derive():Base(){}
+          ~Derive():~Base(){}
+          ```
+          
+          - When create an Derive object, 
+               
+               - 1 step: call Base construct; 
+               
+               - 2 step: construct member variable;
+               
+               - 3 step: call Derive construct. 
+               
+               - When Base construct have arguments, Derive should explicitly use **initilization list**. 
+               
+          - Destruct order is inverse of construct.
 
+          - Same member variable/function name in Base and Derive:
+          
+               - Derive will use **::** for Base member variable.```derive.Base::same_name```
+               
+               - They are stored in different place.
+               
+     - static in Derive
+     
+          - static member in Base will be shared in Derive
+          
+          - static member must be initialize out class. ```int Base::i = 0```
+          
+          - access static member.
+          ```
+          Base::static_member;
+          base_object.static_member;
+          ```
 
+- Multiple Inheritance
 
-
+     - Format
+     ```
+     Derive::derive(formal arguments): public Base_1(arguments_1), public Base_2(arguments_2){}
+     ```
+     
+     - virtual
+     
+          - Reason: Multiple inheritance lines may use **same Base**. So the Base construct will be called several times which will lead to **ambiguity**. What we need is just construct Base for one time. The way to solve this problem is to use **virtual** when inheriting Base. Then the base is what we call **Virtual Base**.
+          ```
+         class B {public: int b;};
+         class B1 : virtual public B {private: int b1;};
+         class B2 : virtual public B {private: int b2;};
+         class C: public B1, public B2 {private: float d;};
+          ```
 
 
 
