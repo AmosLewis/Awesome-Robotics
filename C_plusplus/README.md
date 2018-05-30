@@ -302,7 +302,67 @@ g++ c_pp.cpp -o c_pp
           func(1,2,3);    // sucess
           ```
      
+- Function Overload
      
+     - Definition rule
+          - Same function name, 
+          - Same return value, 
+          - Different function formal parameters(different order,type,number).
+     
+     - Call rule
+     
+          - All function with same name as candidate
+          
+          - Strictly match
+          
+          - Could implicitly cast(float->double, char->int)
+          
+     - Implementation of overload
+          
+          - name mangling(v c i f l d -> void char int float long double)
+          ```
+          void func(char a)                            // func_c(char a)
+          void func(char a, int b, double c);          // func_cid(char a, int b, double c)
+          ```
+          
+     - overload and default argument cannot be as the same time
+     ```
+     int func(int a);
+     int func(int a, int b, int c =0 );      // default argument
+     int func(int a, int b);                 // overload
+     
+     //main
+     int c = func(1,2);                      // error, ambiguity
+     ```
+     
+     - overload and function pointer
+     
+          ```
+          int func(int a);
+          int func(int a, int b);
+
+          typedef int (*PFUNC1)(int a);  // int(*)(int a)
+          typedef int (*PFUNC2)(int a);  // int (*)(int a, int b)
+
+          // main
+          PFUNC1 p1 = func();
+          int c = p(1);
+          PFUNC2 p2 = func();
+          int c = p2(1,2);
+          ```
+     
+          - review of function pointer (you can found detail in C review note)
+          ```
+          // method 1
+          typedef void (FUNC)(int a, int b);      // declare a function type
+          FUNC *p1 = NULL;                        // define a function pointer
+          // method 2
+          typedef void (*FUNC)(int a, int b);     // declare a function pointer type
+          FUNC p2 = NULL;                         // define a function pointer
+          // method 3
+          void (*FUNC)(int a, int b);             // : define a function pointer variable
+          
+          ```
      
      
      
