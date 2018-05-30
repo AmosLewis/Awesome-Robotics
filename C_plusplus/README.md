@@ -1,5 +1,12 @@
 # Review note for C++
 
+### Compiler
+```
+touch c_pp.cpp
+g++ c_pp.cpp -o c_pp
+./c_pp
+```
+
 ### [***Knowledge Note***]
 #### [***Chapter_One***] : C++: Enhancement of C
 
@@ -244,17 +251,57 @@
 
           - no loop, no too much if, not so big(usually < 10 line), no get address operation(&),  declaration must before call.
 
-- inline and macro
+     - inline and macro
 
-     ```
-     #define SQR(x) ((x)*(x))
+          ```
+          #define SQR(x) ((x)*(x))
 
-     #inline int sqr(int x)
-     {
-          return x*x;
-     }
-     ```
+          #inline int sqr(int x)
+          {
+               return x*x;
+          }
+          ```
 
+- Default argument and placeholder argument
+
+     - Default argument
+          
+          - Noramly in C, when you call a function, the value of formal argument is get from real arguments. But in C++, you can set default value for formal argument.
+          ```
+          void myPrint(int x = 3)
+          ```
+          
+          - Once you give an default value, the right formal arguments should all be assignmented with default value.
+          ```
+          float volume(float length, float weigh = 4, float high = 5)
+          // main
+          float v0 = volume(10);
+          float v1 = volume(10, 20);
+          float v2 = volume(10, 20, 30);
+          ```
+     
+     - Placeholder argument
+     
+          - type without name in formal argument
+          ```
+          int func(int a, int b, int)
+          {
+               return a+b;
+          }
+          // main
+          func(1,2);      // error
+          func(1,2,3);    // sucess
+          ```
+          
+          - combine with default value. C++ use it for compatibility with C
+          ```
+          int func(int a, int b, int = 0)
+          {
+               return a+b;
+          }
+          func(1,2);      // sucess
+          func(1,2,3);    // sucess
+          ```
      
      
      
