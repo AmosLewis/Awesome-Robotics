@@ -855,9 +855,84 @@ g++ c_pp.cpp -o c_pp
           }	
           ```
 
+- Advanced operator overloading
 
+     - operetor=
+     
+          - return value should not use const
+          
+          - There is a default operator= which is swallow copy. Deep copy should be implemented by yourself.
+          
+          - Self defined problem: 1. memory leak 2.re-destruct 3. self assignment
+          
+          ```
+          class A
+          {
+               A& operator=(const A&another)
+               {
+                    return *this;
+               }
+          };
+          ```
+          
+     - operator[]
+     
+          - ```type class::operator[] (type)```
+          
+          - if x is an object of class X: ```x[y] ===> x.operator[](y)```
+          ```
+          class vector
+          {
+          public:
+               vector(int n) {v = new int[n]; size = n}
+               ~vector() {delete[] v; size = 0;}
+               int& operator[](int i) { return v[i];}       // return reference could be as left value
+          private:
+               int *v; int size;
+          };
+          // main
+          vector a(5);
+          a[2] = 12;
+          ```
 
+     - operator()
+     
+          - **functor**: class with operator()
+          ```
+          class A
+          {
+          public:
+               int operator()(int i) {return i*i;}
+               double operator()(double d) {return d*d;}
+          };
+          // main
+          A a;
+          int i = a(4);
+          double d = a(3.14);
+          ```
+          
+     - && and || cannot be overloaded
+     
+     - -> 
+     ```
+     class_name& operator*(){}
+     ```
+     
+     - *
+     ```
+     class_name* operator->(){}
+     ```
+     - Smart pointer
+     
+          - Typically when you use **new**, you must yous **delete** to free the memory on heap. But with auto_ptr, you don't need to use **delete**.
 
+          - auto_ptr ( not in C++11)
+          
+          - shared_ptr
+          
+          - weak_ptr
+          
+          - unique_ptr
 
 
 
