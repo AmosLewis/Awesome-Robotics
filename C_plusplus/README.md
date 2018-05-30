@@ -384,11 +384,11 @@ g++ c_pp.cpp -o c_pp
           
       - access properity
       
-          - public(default for struct): both outer and inner can access
+          - **public**(default for struct): both outer and inner can access
           
-          - protected: outer function cannot access, inner function can access.
+          - **protected**: outer function cannot access, inner function can access.
           
-          - private(default for class): outer function cannot access, inner function can access.
+          - **private**(default for class): outer function cannot access, inner function can access.
           
       - Object-oriented and Process-oriented
           
@@ -423,12 +423,125 @@ g++ c_pp.cpp -o c_pp
           double r = A.Get_Radius();
           ```
      
+#### [***Chapter_Four***] : Object construct and destruct
+
+- Constuct function
+
+     - Construct function is used for initilize object of class. like malloc in C.
+     
+     - Call:  Manually / Automatically
+     
+     - format: Same name with class. No return value
+          ```
+          class A
+          {
+          public:
+               A( formal argument )
+               {
+                    ;
+               }
+          private:
+               int a;
+               int b;
+          }
+          ```
+     - C++ has default construct function(**swallow copy**). Once you implement (deep copy) youself, default construct function won't exist.
+     
+     - Classification
+          
+          - Without argument(**default**)
+          ```
+          A()
+          {
+               ;
+          }
+          // main
+          A a;
+          ```
+               
+          - With arguments. Once you implement it, C++ compiler won't give you **without argument construct** will not exit.
+          ```
+          A( int a, int b)
+          {
+               ;
+          }
+          // main
+          A a(10,20);
+          ```
+          
+          - Copy construct function(**default**: only copy member variable): constuct an object by an exist object. Once you implement it, C++ compiler won't give you **without argument construct** will not exit.
+          ```
+          A( const A &another_obj)
+          {
+               ;
+          }
+          // main
+          A a1;          // Witout argument
+          A a1(10,20);   // With arguments
+          A a2 = a1;     // 1. copy construct
+          A a2(a1);      // 2. copy construct
+          void func(A p);
+          func(a1);      // 3. copy constuct, p = a2
+          A func1();
+          A a3= func1(); // 4. copy construct
+          ```
+          
+          - Initilize list
+               
+               - When a **big class** include a **small class**, we must use construct function **with arguments** & **initlize list** for big class.
+               
+               - When **const/reference** object as member variable, we must use construct function **with arguments** & **initlize list** for big class.  
+          ```
+          class AB
+          {
+          public:
+               AB(int a, int b)
+               {
+                    ;
+               }
+          private:
+               int a;
+               int b;
+          }
+          
+          class ABC
+          {
+          public:
+               ABC():ab1(1,2), ab2(3,4), m(100)         // random order for list
+               {
+                    ;
+               }
+          private:
+               AB ab1;
+               AB ab2;
+               const int m;
+          }
+          ```
+               
+     
+- Destruct
+     
+     - Used for clear something before delete object. Like free in C.
+     
+     - - Call: Automatically
+     
+     - format
+     ```
+     class A
+     {
+          ~A()
+          {
+               ;
+          }
+     }
+     ```
      
      
+- Object new and delete
+
+     - **new** and **delete** in C++ is a replacement for **malloc** and **free** in C.
      
-     
-     
-     
+     - new and delete is operator, not function. So it is very efficient.
      
      
      
