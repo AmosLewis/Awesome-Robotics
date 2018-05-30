@@ -364,10 +364,64 @@ g++ c_pp.cpp -o c_pp
           
           ```
      
+#### [***Chapter_Three***] : Class
+- Concept
+     - class and object
      
+     - member function and member variable
      
+     - Feature of object orientation: package, inheritance, polymorphism
      
+     - class in C++ is an replacement of struct in C
      
+ - Package and access control
+ 
+     - struct
+          
+          - all action and access property is **public**, so we cannot hide inner data.
+          
+          - manipulation of struct is from outer function. 
+          
+      - access properity
+      
+          - public(default for struct): both outer and inner can access
+          
+          - protected: outer function cannot access, inner function can access.
+          
+          - private(default for class): outer function cannot access, inner function can access.
+          
+      - Object-oriented and Process-oriented
+          
+          - Object-oriented: Dog.Eat(shit);
+          
+          - Process-oriented: Eat(Dog, shit);
+     
+      - Definition of class
+          ```
+          class Circle
+          {
+          private:
+                    double radius;
+          public:
+                    void Set_Radius(double r)
+                    {
+                         radius = r;
+                    }
+                    double Get_Radius()
+                    {
+                         return radius;
+                    }
+                    double Get_Area()
+                    {
+                         return 3.14f * radius * radius;
+                    }
+          };
+          
+          // main
+          Circle A;
+          A.Set_Radius( 6.24 );
+          double r = A.Get_Radius();
+          ```
      
      
      
