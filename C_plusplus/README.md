@@ -500,21 +500,21 @@ g++ c_pp.cpp -o c_pp
                     ;
                }
           private:
-               int a;
-               int b;
+               int _a;
+               int _b;
           }
           
           class ABC
           {
           public:
-               ABC():ab1(1,2), ab2(3,4), m(100)         // random order for list
+               ABC():_ab1(1,2), _ab2(3,4), _m(100)         // random order for list
                {
                     ;
                }
           private:
-               AB ab1;
-               AB ab2;
-               const int m;
+               AB _ab1;
+               AB _ab2;
+               const int _m;
           }
           ```
                
@@ -567,7 +567,7 @@ g++ c_pp.cpp -o c_pp
      
 - static member variable & member function
 
-     - static member variable: 
+     - static member variable(data segment): 
      
           - Belongs to class, not just any specific object. All object will share it.
           
@@ -579,15 +579,315 @@ g++ c_pp.cpp -o c_pp
           }
           int X::s = 0;            // not in main
           // main
-          X a, b, c, d;
+          A a, b, c, d;
           cout<<a::s<<endl;
           ```
           
           - stored in data segment, so doesnot caculated in class size.
+ 
+     - static member function
      
+          - declaration and call
+                    ```
+          class A
+          {
+               static int func();
+          }
+          int A::func()
+          {
+               ;
+          }
+          // main
+          A a, b, c, d;
+          cout<<a.func()<<endl;
+          ```
+          
+          - It can only access static member. 
+          
+          - It only belongs to class not object, so doesnot has **this pointer**.
+          
+          - None static member function belongs to object, it has **this pointer**.
+          
+ - Mechanism of property & function prosessing by compiler 
+ 
+     - Store
+          
+          - member variable(use _ before its name)
+          
+               - static: store in object, like struct
+               
+               - normal: store in data segment(global)
+               
+          - member function: store in code segment
+          
+               - static: without this pointer
+               
+               - normal: with this pointer pointing to current object
+               
+      - **this** pointer
+      
+          - member function implicitly include this pointer that points to current obj.
+          ```
+          class A
+          {
+               void func(int a,  int b)      void func(A *const this, int a, int b)
+               {                             {
+                    x = a;                        this->x = a;
+                    y = b;                        this->y = b;
+               }                             }
+          }
+          ```
+          
+      - global function & member function
+      
+          - global ===> member : use this to hide left operand
+          ```
+          A add(A &a1, A &a2) ===> A add(A &a2)
+          ```
+          
+          - member ===> global: add an arguments
+          ```
+          void func() ===> void func(A *athis)
+          ```
+          
+          - return item / reference
+          ```
+          A& add(A &a2)                           // return reference
+          {
+               this->a = this->a + a2.getA();
+               this->b = this->b + a2.getB();
+               return *this;
+          }
+          A add(A &a2)                            // return item
+          {
+               this->a = this->a + a2.getA();
+               this->b = this->b + a2.getB();
+               A a3(this->a, this->b);
+               return a3;
+          }
+          ```
      
+- friend
      
+     Friend is someone that need to vist class member frequently. It is not a member of class. Friend can accelerate efficiency of program, but damage the encapsulation and hiddenness of class. Friend can vist **private member** of class. Friend include **friend function** and **friend class**.
      
+     - friend function
+          
+          - friend is none-member function that can vist private member of class. It does not belong to any class.
+          
+          - global function as friend function:
+          ```
+          class A
+          {
+          public:
+               A(int x, int y): _x(x), _y(y)
+               {
+                    ;
+               }
+               friend int func_f(A &a, A &b);
+          private:
+               int _x, _y;
+          }
+          int func_f(A &a, A &b)
+          {
+               ;
+          }
+          // main
+          A a1(1,2),a2(3,4);
+          int a = func_f(a1, a2);
+          ```
      
+          - member function in other class as friend function in current class:
+          ```
+          class A;                           // Forward declaration，used for point and reference in B
+          
+          class B
+          {
+          public:
+               int func_f(A &a, A &b);
+          }
+          
+          class A
+          {
+          public:
+               A(int x, int y): _x(x), _y(y)
+               {
+                    ;
+               }
+               friend int B::func_f(A &a, A &b);
+          private:
+               int _x, _y;
+          }
+          int B::func_f(A &a, A &b)
+          {
+               ;
+          }
+          // main
+          A a1(1,2),a2(3,4);
+          B b;
+          int a = b.func_f(a1, a2);
+          ```
+     - friend class
      
+          - all members function in friend class is friend function. It is used when you want one class can access another class private and protected member.
+          ```
+          class A
+          {
+          public:
+               friend class B;
+          private:
+               int _x,_y;
+               friend class C;
+          }
+          class B
+          {
+          public:
+               inline int func()
+               {
+                    A a;
+                    cout<<a._x<<endl;
+               }
+          }
+          ```
+
+     - friend discussion
+          
+          - location: declaration must in class. It doesn't matterh weather it is public/private/protucted. But normally, we declare at the beginning of class.
+          
+          - Friend relationship cannot be inheritted.
+          
+          - Friend relationship is one way.
+          
+          - Friend relationship is cannot be transfer. B is frient of A, C is friend of B, C might not be friend of A.
+          
+- operator overloading
+
+     - Overloading means give a new meaning. Operator overloading is actually function overload
+     ```
+     Type operator name_operator(formal arguments)
+     {
+          ;
+     }
+     ```
      
+     - Example
+     ```
+     class A
+     {
+     public:
+          A(int x, int y): _x(x), _y(y){}
+          friend A operator+(A &a, A &b);
+          A operator+(A &b);
+     private:
+          int _x, _y;
+     }
+     A operator+(A &a, A &b)
+     {
+          return A(a._x+b._x, a._y+b._y);
+     }
+     A A::operator+(A &b)
+     {
+          return A(this._x+b._x, this._y+b._y);
+     }
+     // main
+     A a1(1,2), a2(3,4);
+     A a3 = a1+a2;
+     A a3 = c3.operator+(c1,c2);
+     ```
+     
+     - rule
+          
+          - C++ doesnot allow you to define a new operator. We can only overload existed C++ operator.
+          
+          - overload cannot change the number of object that processed by operator( no default arguments). 
+          
+          - overload cannot change the priority of operator.
+          
+          - overload cannot change the associative of operator.
+          
+          - overload must defined with class object at the same time.
+          
+          - most of operator for class should overload, except **=** , **&**.
+          
+     - friend function / member function
+     
+          - whose member function: who call the operator( usually left operand )
+          
+          - whose friend function: who is the parameter of the operator( usually right operand )
+          
+          - Exmaple
+          ```
+          class Mail;
+          class Sender
+          {
+          public:	
+               Sender(string	s):_addr(s){}
+               Sender& operator<<(const Mail & mail);
+          private:
+               string _addr;
+          };
+          
+          class Mail
+          {
+          public:
+               Mail(string _t,string _c ):_title(_t),_content(_c){}
+               friend Sender& Sender::operator<<(const Mail & mail);	
+          private: 
+               string _title;	
+               string _content;	
+          }; 
+          
+          Sender& Sender::operator<<(const Mail & mail)	
+          { 
+               cout<<"Address:"<<_addr<<endl;	
+               cout<<"Title	:"<<mail._title<<endl;	
+               cout<<"Content:"<<mail._content<<endl;	
+               return *this;	
+          }	
+          
+          in main()	
+          {
+               Sender sender("danbing_at@gmail.com");	
+               Mail	mail("note","meeting at 3:00	pm");	
+               Mail	mail2("tour","One night in beijing");	
+               sender<<mail<<mail2;	
+               return 0;	
+          }	
+          ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
