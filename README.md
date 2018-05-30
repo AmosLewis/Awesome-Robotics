@@ -19,7 +19,7 @@ This reprository will include:
 
 - Cloud Computing
 
-- [Computer Vision]((/ComputerVision) (Last updated 2018/05/30)
+- [Computer Vision](/ComputerVision) (Last updated 2018/05/30)
 
 - CUDA Programming
 
