@@ -132,9 +132,9 @@ int main()
 
 		- 1. Computer system loads C code to memory.
 		
-		- 2. Computer system seperates C code into 4 region.
+		- 2. Computer system seperates C code into [4 region](https://stackoverflow.com/questions/93039/where-are-static-variables-stored-in-c-c).
 		
-			- ***stack***: **Compiler** **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
+			- ***stack segment***: **Compiler** **automatically** memory alloc and free; Store **function paramerter** and **local variable**.
 			```
 			char *getMem2()
 			{
@@ -145,7 +145,7 @@ int main()
 			}
 			```
 			
-			- ***heap***: **Programmer** alloc and free(dynamic memory alloc and free); If Programmer not free, **Computer System** will free it at the end of program;
+			- ***heap segment***: **Programmer** alloc and free(dynamic memory alloc and free); If Programmer not free, **Computer System** will free it at the end of program;
 			
 			```
 			char *getMem(int num)
@@ -161,27 +161,27 @@ int main()
 			// for test code, please check test.cpp 1.3.1
 			```
 			
-			- ***static in global region***: **global variable** & **static variable**; **Initialized** and **Uninitialized** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
+			- ***data segment***: **global variable**, **constant** & **static variable**; **Initialized** and **Uninitialized(BSS)** are seperately put in adjacent two memory region; **Computer System** will free at the end of program.
 			
-			- ***const in global region***: Store string const and other const; **Computer System** will free at the end of program.
+				- ***const in data segment***: Store string const and other const; **Computer System** will free at the end of program.
 
-			```
-			//1.3.2 global 
-			// note should use const, or it will output warning/error [e2]
-			const char *getStr1()
-			{
-				const char *p1 = "abcdefg2";
-				return p1;
-			}
-			const char *getStr2()
-			{
-				const char *p2 = "abcdefg2";
-				return p2;
-			}
-			// for test code, please check test.cpp 1.3.2
-			```
+				```
+				//1.3.2 global 
+				// note should use const, or it will output warning/error [e2]
+				const char *getStr1()
+				{
+					const char *p1 = "abcdefg2";
+					return p1;
+				}
+				const char *getStr2()
+				{
+					const char *p2 = "abcdefg2";
+					return p2;
+				}
+				// for test code, please check test.cpp 1.3.2
+				```
 			
-			- ***code***: Store binary code of function.
+			- ***code segment***: Store binary code of function.
 			
 		- 3. extern
 		
