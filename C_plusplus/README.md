@@ -543,6 +543,16 @@ g++ c_pp.cpp -o c_pp
      
      - new and delete is operator, not function. So it is very efficient.
      
+     - **malloc** will not call class **construct** function, but **new** will
+     
+     - **free** will not call class **destruct** function, but **delete** will
+     
+     - **new** allocated array should not assign initlize value.
+     ```
+     float *p = new float (3.14);
+     char *p = new char[10];
+     int (*)[4] p = int[5][4];
+     ```
      
      
      
