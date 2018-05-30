@@ -552,7 +552,38 @@ g++ c_pp.cpp -o c_pp
      float *p = new float (3.14);
      char *p = new char[10];
      int (*)[4] p = int[5][4];
+     int **p = new int *[4];
      ```
+     
+     - format
+          
+          - new:    pointer_variable = new type (constant)
+          
+          - new:    pointer_variable = new type[expression]
+          
+          - delete: delete pointer_variable
+          
+          - delete: delete[] pointer_variable
+     
+- static member variable & member function
+
+     - static member variable: 
+     
+          - Belongs to class, not just any specific object. All object will share it.
+          
+          - It is declared inside class, but must **initialize outside** class.
+          ```
+          class A
+          {
+               static int s;.....
+          }
+          int X::s = 0;            // not in main
+          // main
+          X a, b, c, d;
+          cout<<a::s<<endl;
+          ```
+          
+          - stored in data segment, so doesnot caculated in class size.
      
      
      
