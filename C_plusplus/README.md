@@ -143,33 +143,32 @@ g++ c_pp.cpp -o c_pp
          - Pointer Reference
          
               - 2nd level pointer
-                    ```
-                    void getTeacher1(Teacher **p)
-                    {
-                         Teacher *tmp = NULL;
-                         tmp = (Teacher *)malloc(sizeof(Teacher));
-                         tmp -> age = 33;
-                         *p = tmp;
-                         // skip some NULL check
-                    }
-                    ```
+
+                   ```
+                   void getTeacher1(Teacher **p)
+                   {
+                   Teacher *tmp = NULL;
+                   tmp = (Teacher *)malloc(sizeof(Teacher));
+                   tmp -> age = 33;
+                   *p = tmp;
+                   // skip some NULL check
+                   }
+                   ```
                     
               - pointer reference
-                    ```
-                    void getTeacher2(Teacher* &myp)
-                    {
-                         myp = (Teacher *)malloc(sizeof(Teacher));
-                         myp->age = 33;
-                         // skip some NULL check
-                    }
-                    ```
-                    
-                    main
-                    ```
-                    Teacher *pT1 = NULL;
-                    getTeacher1(&pT1);       // 2nd level pointer
-                    getTeacher1(pT1);        // reference
-                    ```
+
+                   ```
+                   void getTeacher2(Teacher* &myp)
+                   {
+                   myp = (Teacher *)malloc(sizeof(Teacher));
+                   myp->age = 33;
+                   // skip some NULL check
+                   }
+                   // main
+                   Teacher *pT1 = NULL;
+                   getTeacher1(&pT1);       // 2nd level pointer
+                   getTeacher1(pT1);        // reference
+                   ```
                     
           - const reference
           
