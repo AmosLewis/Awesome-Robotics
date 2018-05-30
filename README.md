@@ -13,9 +13,8 @@ This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie
 
 This reprository will include:
 
-- [C](/C)
-
-- [C++](/C_plusplus)
+- [C](/C) (Last updated 2018/05/25)
+- [C++](/C_plusplus) (Last updated 2018/05/30)
 
 - Cloud Computing
 
@@ -33,6 +32,6 @@ This reprository will include:
 
 - Motion Planning
 
-- [SLAM](/SLAM)
+- [SLAM](/SLAM) (Last updated 2018/05/25
 
 - ROS
