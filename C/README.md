@@ -589,7 +589,7 @@ int main()
 				```
 				
 			- Don't use char **buf  as formal parameter for two dimention array, use char buf[10][30].
-				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.
+				Because their step is different. char ** is 4 byte, char[][30] step is 30 byte.[type-of-a-pointer-to-a-2d-array](https://stackoverflow.com/questions/45409737/what-is-the-type-of-a-pointer-to-a-2d-array)
 			
 			- If you want to sort this array, you actually sort their string value , which is not like 1rd method that just change their pointer.
 			
