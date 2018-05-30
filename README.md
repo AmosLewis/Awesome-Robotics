@@ -13,12 +13,13 @@ This repository is mantained by [Chi Liu](https://github.com/AmosLewis), [Youjie
 
 This reprository will include:
 
-- [C](/C)   (Last updated 2018/05/25)
+- [C](/C)   (Last updated 2018/05/30)
+
 - [C++](/C_plusplus)  (Last updated 2018/05/30)
 
 - Cloud Computing
 
-- Computer Vision
+- [Computer Vision]((/ComputerVision) (Last updated 2018/05/30)
 
 - CUDA Programming
 
