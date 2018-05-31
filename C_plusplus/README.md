@@ -1663,8 +1663,8 @@ g++ c_pp.o -o hello           // link
      {
           try
           {
-               cout<<"8/2= "<<divede(8,2)<<endl;
-               cout<<"10/0= "<<divede(10,0)<<endl;
+               cout<<"8/2= "<<divide(8,2)<<endl;
+               cout<<"10/0= "<<divide(10,0)<<endl;
           }
           catch( int e )
           {
@@ -1672,11 +1672,57 @@ g++ c_pp.o -o hello           // link
           }
           catch(...)
           {
-               cout<<"unknow exception"<<endl
+               cout<<"unknow exception"<<endl;
           }
      }
      ```
 
+     - unwindling
+     
+          - When exception is been throw, all object(in try) on stack before exception throw occuring,  will be automatically destruct.
+          
+          
+     - Exception declaration
+     
+          - We can list kinds of exception during declaration of function
+          ```
+          void func() trow(A, B, C, D);            // void can and only can throw ABCD and their derive
+          ```
+          
+          - Function can throw any exception if we do not include trow in during function declaration.
+          ```
+          void func();
+          ```
+          
+          - Function does not trow any exception if:
+          ```
+          void func() throw();
+          ```
+          
+          - Function excutes **terminate** function by call **unexcepted** function if it trow an E exception that are not in declaration.
+          
+
+     - Exception variable and life
+
+          - exception has variable type: int, char*, char, class
+
+          - catch will strictly match data type
+
+          - Example
+ 
+ - Standard Excetption Libary
+ 
+     - All exception are class. They have constructor, destructor, operator==.
+     
+     - logic_error & runtime_error class: their constructor formal arguments type is **string**, for descripting exception information..
+     
+     - All exception has an **what()** function, whose return type is **const char***, for descripting exception information.
+     
+     - Example
+     ```
+     
+     ```
+     
 
 
 
