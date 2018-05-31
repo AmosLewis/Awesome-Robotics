@@ -1720,7 +1720,34 @@ g++ c_pp.o -o hello           // link
      
      - Example
      ```
-     
+     #include <stdexcept>
+     class Teacher
+     {
+     public:
+          Teacher(int age)
+          {
+               if (age > 100)
+               {
+                    throw out_of_range("Too old");
+               }
+               this->_age = age;
+          }
+
+     private:
+          int _age;
+     };
+     int main()
+     {
+          try
+          {
+               Teacher t1(102);
+          }
+          catch (out_of_range e)
+          {
+               cout<<e.what()<<endl;
+          }
+     }
+
      ```
      
 
