@@ -1365,7 +1365,52 @@ g++ c_pp.cpp -o c_pp
 
           - function templates overload
           ```
-          
+          int Max(int a, int b)
+          {
+               cout<< "function overload"<<endl;
+               return a > b ? a : b;
+          }
+
+          template<typename T>
+          T Max(T a, T b)
+          {
+               cout<< "function template"<<endl;
+               return a > b ? a : b;
+          }
+
+          template<typename T>
+          T Max(T a, T b, T c)
+          {
+               cout<< "function template overload"<<endl;
+               return Max(Max(a,b),c);
+          }
+
+          int main()
+          {
+               int a = 1;
+               int b = 2;
+               cout<<"Max(a,b): "<<Max(a,b)<<endl;
+               cout<<"Max<>(a,b): "<<Max<>(a,b)<<endl;
+
+               cout<<"Max(3.1,4.1): "<<Max(3.1,4.1)<<endl;
+               cout<<"Max<>(3.1,4.1): "<<Max<>(3.1,4.1)<<endl;
+               cout<<"Max<>(3.1,4.1): "<<Max<int>(3.1,4.1)<<endl;
+               cout<<"Max(3.1,4.1,5.1): "<<Max(3.1,4.1,5.1)<<endl;
+
+               cout<<"Max('a',4.1): "<<Max('a',4.1)<<endl;
+               //cout<<"Max('a',4.1): "<<Max<>('a',4.1)<<endl; // no matching function for call to ‘Max(char, double)
+
+               // function overload
+               // Max(a,b): 2
+               // function template
+               // Max<>(a,b): 2
+               // function template
+               // Max(3.1,4.1): 4.1
+               // function template overload
+               // function template
+               // function template
+               // Max(3.1,4.1,5.1): 5.1
+           }
           ```
 
 
