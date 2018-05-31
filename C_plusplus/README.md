@@ -1522,19 +1522,112 @@ g++ c_pp.o -o hello           // link
 #### [***Chapter_Eight***]: Type cast
 
 - C style
+
+     - Format
      ```
      TYPE b = (TYPE) a
+     ```
+     
+     - Example
+     ```
+     double dPI=3.14;
+     int iPI = (int)dPI;
      ```
      
 - C++ style
 
      - static_cast
+          
+          - static: type is cast during compiling.
+          
+          - Format: TYPE can be any type.
+          ```
+          Type b = static_cast<TYPE> (a)
+          ```
+          
+          - Example
+          ```
+          int iPI = static_cast<int> (dPI)
+          ```
      
      - dynamic_cast
+          
+          - dynamic: type is cast during running time.
+          
+          - Function: Mostly used between Base(virtual) ===> Derive, for polymorphysim.
+          
+          - Format: TYPE should only be reference/pointer
+          ```
+          Type b = dynamic_cast<TYPE> (a)
+          ```
+          
+          - Example
+          ```
+          class Base 
+          { 
+          public: 
+               virtual void func() = 0; 
+          }
+          class Derive : public Base 
+          { 
+          public: 
+               virtual void func()
+               {;}
+          }
+          
+          // main
+          Base *base = NULL;
+          base = new Derive();
+          Derive *derive = dynamic_cast<Derive *>(base)
+          ```
+     
+     - const_cast
+     
+          - const: remove const property
+          
+          - Format: TYPE should only be reference / pointer.
+          ```
+          TYPE b = const_cast<TYPE> (a)
+          ```
+          
+          - Example
+          ```
+          sturct A { int data; };
+          
+          // main
+          const A a = {300};
+          
+          //A a1 = const_cast<A> (a);   //error
+          //a1.data = 300;              //error
+          
+          A *a1 = const_cast<A*> (&a);
+          a1->data = 300;
+          A &a1 = const_cast<A&> (a);
+          a1.data = 400;
+          
+          ```
      
      - reinterpreter_cast
      
-     - const_cast
+          - reinterpreter: re-interpreter data binary format and not change their value.
+          
+          - Function: cast two totally different class(class without inheritance property)
+     
+          - Format:
+          ```
+          TYPE b = reinterpret_cast<TYPE> (a)
+          ```
+          
+          - Example
+          ```
+          Animal *base = NULL;                         // pure virtual Base cannot create object(instantiation)
+          
+          // Dog *pDog = base;                         // error, cannot cast Base ==> Derive directly
+          Dog *pDog = static_cast<Dog *> (base);
+          // Book *book = static_cast<Book *> (base)   // error, cannot cast totally different class
+          
+          Book *book = reinterpret_cast<Book *> (base) // sucess, Force cast totally different class
+          ```
 
 
 
