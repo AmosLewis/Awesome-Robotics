@@ -983,7 +983,12 @@ g++ c_pp.cpp -o c_pp
                     Derive derive;
                     Base *p = &derive;
                     Base base = derive;
+                    p->Same_Name_function() == p->Base_Same_Name_function() != p->Derive_Same_Name_function()
+                    base.Same_Name_function() == base.Base_Same_Name_function() != base.Derive_Same_Name_function()
                     ```
+                    
+               - If Base and Derive has the same name function. If we donot use vitual function, Base pointer p that points to Derive object will call Base same name function.
+               
           - Construct/Destruct in Derive should use construct/destruct in Base.
           ```
           Derive():Base(){}
@@ -1029,28 +1034,179 @@ g++ c_pp.cpp -o c_pp
      
      - virtual
      
-          - Reason: Multiple inheritance lines may use **same Base**. So the Base construct will be called several times which will lead to **ambiguity**. What we need is just construct Base for one time. The way to solve this problem is to use **virtual** when inheriting Base. Then the base is what we call **Virtual Base**.
+          - Problem: Multiple inheritance lines may use **same Base**. So the **Base construct** will be called **several times** which will lead to **ambiguity**. What we need is just construct Base for one time. 
+          
+          - Solution: Use **virtual** when inheriting Base. Then the base is what we call **Virtual Base**.
           ```
          class B {public: int b;};
          class B1 : virtual public B {private: int b1;};
          class B2 : virtual public B {private: int b2;};
          class C: public B1, public B2 {private: float d;};
           ```
+          
+#### [***Chapter_Five***]:Polymorphism
+
+- What is polymorphism
+          
+     - Meaning
+
+          - Similar object(inherit from same base) act differently when get the same input by using the same name member funtion.
+
+     - Problem
+
+          - compiler will always call Base same name function even we re-implemment the same function in Derive. 
+
+          - We want to call same name function based on weather a class object is Base or Derive. Base object call base function. Derive object call derive function.
+          ```
+          Derive derive;
+          Base *p = &derive;
+          Base base = derive;
+          p->Same_Name_function() == p->Base_Same_Name_function() != p->Derive_Same_Name_function()
+          base.Same_Name_function() == base.Base_Same_Name_function() != base.Derive_Same_Name_function()
+          ```
+
+     - Solution
+
+          - use **virtual** before member function
+          ```
+          class Base
+          { public: virtual int func(){;} };
+          class Derive: public Base
+          { public: virtual int func(){;} };
+          // main
+          Derive derive;
+          Base *p = &derive;
+          Base base = derive;
+          p->func() == p->Derive::func() != p->Base::func() 
+          base.func() == p.Derive::func() != p.Base::func() 
+          ```
+       
+     - Conditions:
+     
+          - inherience
+          
+          - virtual overwrite
+          
+          - Base pointers point to Derive object
+     
+     - Binding (polymorphsim theory basic)
+     
+          - static binding: without virtual, bind during compilier.(example: overload function)
+          
+          - dynamic binding: with virtual, bing during running time (example: swith and if)
+          
+          - Explaination
+          
+               - C/C++ use static compiler, which means during compiling compiler decide object class based on the pointer points to them.
+               - When the program doesnot run, program cannot know that we use Base pointer points to Derive object. So for safety, the compiler result will Base same name member function. This kind of properity will be called **static binding**.
+               
+               - When we use **virtual function** to implement polymorphism,  it is called **dynamic binding**. Which means binding will during running time. **vitual function** tell program to determine whether a **Base pointer** points to an **Base_object/ Derive_object**.
+               
+- virtual destruct
+
+     - Construct function cannot be virtual.
+     
+     - Destruct function can be virtual. It leads **delete** to destruct Derive object source by Base pointer.
+     ```
+     class Base
+     {
+     public:
+          Base(){ p = new char[10]; strcpy(p, 'Base');}
+          vitual ~Base(){ delete[] p;}
+     private:
+          char *p;
+     } 
+     class Derive: public Base
+     {
+     public:
+          Derive(){ p = new char[10]; strcpy(p, 'Derive');}
+          ~Derive(){ delete[] p;}
+     private:
+          char *p;
+     } 
+     void howtodelete(Base *base){ delete base;}
+     // main
+     Derive *derive = new Derive;
+     // delete derive;             // No need to use virtual ~, because use Derive object delete itself directly.
+     howtodelete(derive);          // have to use virtual ~, because use Base object to delete Derive object source.
+     ```
+
+- Overeload, Overwrite, Re-definition
+
+     - Overload(add):
+          
+          - same class
+          
+          - same function name
+          
+          - **different arguments**
+          
+          - virtual is not important
+          
+     - Overwrite(cover):
+          
+          - **different class (Base/Derive)**
+          
+          - same function name
+          
+          - same arguments
+          
+          - With virtual in Base is a must 
+          
+     - Re-definition(hidden):
+     
+          - Base function is hidden if:
+          
+               - different class (Base/Derive)
+
+               - same function name
+
+               - **Diferent arguments**
+
+               - virtual is not important
+
+          - Base function is hidden if:
+          
+               - different class (Base/Derive)
+
+               - same function name
+
+               - **Same arguments**
+
+               - **Without virtual** in Base 
 
 
+- Implementation priciple of polimophysim
 
+     -  virtual table
+          
+          - C++ compilier automatically creates an **vitrual table** every class with **vitual function**. 
+          
+          - virtual table store all pointers points to member function.
+          
+          - All virtual member function(not just pointers) will be put in virtual table.
+          
+          - Every object will have an virtual pointer(**VPTR**) points to its virtual table
+          
+          - During running time, object will call virtual function based on its **vptr**.
+          
+          - So call virtual function is not efficiently. It is not necessary to decalare all member function to be virtual.
+          
+          - [VirtualFunctionsAndSharedMemory](http://wiki.c2.com/?VirtualFunctionsAndSharedMemory)
 
+     - Call virtual member function in Construct member function 
+     
+          - Base construct function will call its own virtual member function.
+     
+          - When an object is construted, compiler will initilize VPTR.
+          
+          - When construction completed, VPTR will fixed.
+          
+          - Base object VPTR points to Base VTABLE.
+          
+          - Derive object VPTR points to Derive VTABLE.
 
-
-
-
-
-
-
-
-
-
-
+- virtual function & abstruct class
 
 
 
