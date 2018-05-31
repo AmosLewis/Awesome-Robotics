@@ -1044,7 +1044,7 @@ g++ c_pp.cpp -o c_pp
          class C: public B1, public B2 {private: float d;};
           ```
           
-#### [***Chapter_Five***]:Polymorphism
+#### [***Chapter_Six***]:Polymorphism
 
 - What is polymorphism
           
@@ -1232,7 +1232,7 @@ g++ c_pp.cpp -o c_pp
           
           - Interface class only have member function decalaration, no member variable.
 
--C Interface oriented program
+- C Interface oriented program
 
      - Define a function type
      ```
@@ -1284,4 +1284,4 @@ g++ c_pp.cpp -o c_pp
           - similar to C++ polymophysim, could be expand
 
 
-
+#### [***Chapter_Seven***]:Template
