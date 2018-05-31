@@ -1206,16 +1206,82 @@ g++ c_pp.cpp -o c_pp
           
           - Derive object VPTR points to Derive VTABLE.
 
-- virtual function & abstruct class
+- Pure virtual function & abstruct class
 
+     - Pure virtual function:
+          
+          - Base class declare virtual function but not implement. Derive define its own virtual function.
 
+          - Pure virtual function give Derive an pupblic interface.
+          
+          - Format
+          ```
+          virtual Type function_name(formal arguments) = 0;
+          ```
 
+     - Absturct class:
+     
+          - class will pure virtual function. It cannot be instantialize(cannot create object).
+          
+          - If the Derive doesnot define the virtual function. Then the virtual function will still be pure virtual function in Derive.And the Derive still be an pure virtual base.
+          
+      
+     - C++ could use pure virtual function to implement Interface class. 
+     
+          - C++ dosenot have notion of Interface.
+          
+          - Interface class only have member function decalaration, no member variable.
 
+-C Interface oriented program
 
+     - Define a function type
+     ```
+     typedef int(FUNC)(int);
+     ```
+     
+     - Define a function pointer type
+     ```
+     typedef int(*FUNC_P)(int);
+     ```
+     
+     - Define a function pointer
+     ```
+     int Test(int i){ return i;}
+     // FUNC_P pt = Test
+     FUNC *pt = Test;              // pt is function pointer that point to function type; and intilized points to Test
+     int  a =pt(1);
+     
+     int(*pt)(int) = &Test;         // pt is function pointer. Defined directly. Points to Test. 
+                                    // Test == &Test, so you can also use Test here
+     
+     pt();
+     (*pt)();                       // according to pointer call indirectly
+     ```
+     
+     - call back function
+     ```
+     int libfun( int(*pt)(int a) );
+     
+     // main
+     int (*pt)(int i);
+     pt = test;
+     libfun(pt);
+     
+     // definition
+     int libfun( int(*pt)(int a) )
+     {
+          int a;
+          a = 1;
+          int c = Test(1);
+          int d = pt(a);
+     }
+     ```
 
-
-
-
+     - Advantages of callback funtion
+     
+          - Seperate function call and implementation of function
+          
+          - similar to C++ polymophysim, could be expand
 
 
 
