@@ -1630,8 +1630,52 @@ g++ c_pp.o -o hello           // link
           ```
 
 
+#### [***Chapter_Nine***]:Exception
 
+- Exception is an program control mechanism.
 
+     - stack mechanism.
+     
+     - exception enable object-oriented program could enable control according to direction and purpose. It was designed to change program control structure. However, it turns out that it gain great benefit from erroe exception. 
+
+- Concept
+
+     - Trational error handling is based on return value.
+     
+     - Exception  in C++ enable seperate of **exception happen** & **exception handle**.
+     
+     - C++ cannot handle error by function stack mechanism because it is first in last out, you cannot jump.
+     
+     - Excpetion enable you can jump between function.
+
+- Implementation of Exception
+
+     - Example
+     ```
+     int divide(int x, int y)
+     {
+          if (y == 0)
+          {    throw x;  }
+          return x/y;
+     }
+     
+     int main(void)
+     {
+          try
+          {
+               cout<<"8/2= "<<divede(8,2)<<endl;
+               cout<<"10/0= "<<divede(10,0)<<endl;
+          }
+          catch( int e )
+          {
+               cout<<"e"<<"is divided by error"<<endl;
+          }
+          catch(...)
+          {
+               cout<<"unknow exception"<<endl
+          }
+     }
+     ```
 
 
 
