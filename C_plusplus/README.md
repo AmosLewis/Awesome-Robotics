@@ -7,6 +7,14 @@ g++ c_pp.cpp -o c_pp
 ./c_pp
 ```
 
+We can also use 4 step: preprocess, compiler, assemble, link
+```
+g++ -E c_pp.cpp -o c_pp.i     // preprocess
+g++ -S c_pp.i -o c_pp.s       // compile
+g++ -c c_pp.s -o c_pp.o       // assemble
+g++ c_pp.o -o hello           // link
+```
+
 ### [***Knowledge Note***]
 #### [***Chapter_One***] : C++: Enhancement of C
 
@@ -1293,7 +1301,7 @@ g++ c_pp.cpp -o c_pp
      
      - Meaning: Parametric data type.
      
-          - [class is a kind of data type](https://stackoverflow.com/questions/25125454/c-class-name-as-data-type) that defined by ourself. In order to seperate inner data type and self-defined data type, C++ use 2 different keywords in templates: **typename**, **class**.
+          - [class is a kind of data type](https://stackoverflow.com/questions/25125454/c-class-name-as-data-type) that defined by ourself. In order to seperate inner data type and self-defined data type, C++ use 2 different keywords in templates: **typename**, **class**. However, in parameter list, there is no difference between [typename & class](https://stackoverflow.com/questions/2023977/difference-of-keywords-typename-and-class-in-templates), they are interchangable. Although in some very special case, there are difference between them(When specifying a template template, the class keyword MUST be used before C++17). We will talk about it later, or you can refer to the link above.
           
      - Templates
      
@@ -1413,9 +1421,120 @@ g++ c_pp.cpp -o c_pp
            }
           ```
 
+     - C++ inner implementation of template
+     
+          - Compiler create different funcion according to specific type. So it won't be able to process arbitrary function.
+          
+          - compiler will compile function template **twice**:
+          
+               - 1st at decalration. For template code itself.
+               
+               - 2en at call. Replace arguments and compile.
+               
+- class template
 
+     - Format
+     ```
+     template<typename T> / template<class T>
+     class A
+     {
+     }
+     ```
+     
+     - Inheritance of template class
+     
+          - Derive(2 type) must clearly write the type of Base template class
+          ```
+          template <class T>
+          class A{};
+          
+          class B: public A<int> { public: B(int a): A<int>(a) {;}};       // derived template class
+          
+          template <class T>
+          class C:public A<T> { public: C(int a): A<T>(a) {;}};            // derived class template
+          ```
+          
+- Implementation of class template
 
+     - function body in class
+     
+     - function body out class(in a .cpp)
+     
+     - function body out class(in .h and .cpp)
+     
+          - Donnot use friend function in template if not necessary, expect operator<< and operator>>. **T** is important
+          ```
+          // .h
+          template <class T>
+          class A;
+          
+          template <class T>
+          ostream & operator<<(ostream &os, A<T> &c);
+          template <class T>
+          A<T> mySub(A<T> &one, A<T> &another);
+          
+          template <class T>
+          class A
+          {
+               friend ostream & operator<< <T> (ostream &os, A<T> &c)
+               friend A<T> mySub(A<T> &one, A<T> &another);
+          public:
+               A();
+               A(T a, T b);
+          private:
+               T _a, _b;
+          }
+          // .cpp member function
+          template <class T>
+          A<T>::A(){}
+          
+          template <class T>
+          A<T>::A<T>(T a, T b){ this->_a = a; this->_b = b;}
+         
+          // .cpp friend function
+          template <class T>
+          ostream & operator<< <T> (ostream &os, A<T> &c)
+          { os<<c._a<<"+"<<c._b; return os}
+          
+          template <class T>
+          A<T> mySub(A<T> &a1, A<T> &a2)
+          { A<T> temp(a1._a - a2._a, a1._b - a2._b); return temp; }
+          
+          // main
+          A<int> a(1,2);
+          A<int> b(3,4);
+          A<int> c;
+          c = mySub(a,b);
+          cout<<c<<endl;
+          ```
+          
+- static in class template
 
+     - Format
+     ```
+     templlate <class T>
+     class A {public: static T s_value; }
+     
+     template <class T>
+     T A<T>::s_value = 0;
+     ```
+
+#### [***Chapter_Eight***]: Type cast
+
+- C style
+     ```
+     TYPE b = (TYPE) a
+     ```
+     
+- C++ style
+
+     - static_cast
+     
+     - dynamic_cast
+     
+     - reinterpreter_cast
+     
+     - const_cast
 
 
 
