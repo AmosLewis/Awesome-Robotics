@@ -1284,4 +1284,134 @@ g++ c_pp.cpp -o c_pp
           - similar to C++ polymophysim, could be expand
 
 
-#### [***Chapter_Seven***]:Template
+#### [***Chapter_Seven***]:Templates
+- Generic Pragamming
+     
+     - Same function could be used on diffrenet data type.
+     
+     - The C++ language base is **Templates**.
+     
+     - Meaning: Parametric data type.
+     
+          - [class is a kind of data type](https://stackoverflow.com/questions/25125454/c-class-name-as-data-type) that defined by ourself. In order to seperate inner data type and self-defined data type, C++ use 2 different keywords in templates: **typename**, **class**.
+          
+     - Templates
+     
+          - function template
+          
+          - **class template**
+          
+               - [**template class**](https://stackoverflow.com/questions/879535/what-is-the-difference-between-a-template-class-and-a-class-template) is an class whose origin is class template.
+          
+ - function Template
+ 
+     - An generic function whose function type and data type is not specilaized.
+     
+     - Format
+     ```
+     template<typename T>
+     template<class T>
+     
+     template<typename type_list>
+     return_type function_template_name(formal parameter)
+     {
+          ;
+     }
+     ```
+     
+     - Conditions
+     
+          - same number of function formal arguments
+          
+          - same function body
+          
+          - different type of function formal arguments
+     
+     - Example
+     ```
+     template<typename T>
+     void myswap(T &a, T &b)
+     {
+          T t = a;
+          a = b'
+          b = t;
+     }
+     // main
+     int x = 1;
+     int y = 2;
+     myswap(x,y);
+     myswap<int>(x,y);
+     char a = 'a';
+     char b = 'b';
+     myswap(a,b);
+     myswap<int>(a,b);
+     ```
+     
+     - function template & function overload
+     
+          - function templates
+          
+               - **Does not support implicitly** data type cast. Real arguments data type must strictly match formal data type.
+               
+               - Use **<>** to explicitly call function template.
+               
+               - Use funtionc templates if function template has better match.
+          
+          - normal overload function 
+               
+               - Support **implicitly** data type cast.(char ->int)
+
+               - Normal overload function first, when both function templates and normal overload function satisfy calling.
+
+          - function templates overload
+          ```
+          
+          ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
