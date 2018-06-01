@@ -1752,18 +1752,109 @@ g++ c_pp.o -o hello           // link
      
 
 
+#### [***Chapter_Ten***]:iostream
+
+- structure
+
+     - C: printf and scanf is not safe.
+     
+     - C++ iostream is type safe. And it can be expand. But it is very complicated.
+     
+     - ios is an abstruct Base(only virtual function =0;). You can see the structure [here](http://www.cplusplus.com/reference/istream/iostream/).
+
+- Standard I/O stream
+
+     - stdand I/O object: cin, cout, cerr, clog
+     
+     - cout
+          
+          - console output
+          
+          - cout is not an keywords. It is an object defined in iostream.
+          
+          - different from prinft, you don't need to specify type of data.
+          
+          - endl: output, clear buffer and add '\n'.
+          
+          - In C++, << only overload for standard data type. If you want to cout your own data type, you need to overload operator<<.
+
+     - cerr
+          
+          - standard error stream
+          
+          - similar to cout
+               
+               - cout can output to screen / file on disc
+               
+               - ceer can only output to scree.
+
+               - usually used during debug
+     
+     - clog 
+     
+          - consule log, standard error stream
+          
+          - similar to cerr
+          
+               - cerr doesnot pass buffer
+               
+               - clog first store in buffer, when **buffer is filled** / **endl**, output to screen.
 
 
+- Standard Output stream
+     
+     - cout
+          
+          - cout.put()
+          
+          - cout.write()
+          
+          - cout.width()
+          
+          - cout.fill()
+          
+          - cout.setf(flag)
+          
+     - operator / control symbol:  #include <iomanip>
+     
+          - flush
+          
+          - endl
+          
+          - oct
+          
+          - dec
+          
+          - hex
+          
+          - setbase
+          
+          - setw
+          
+          - setfill
+          
+          - setprecision
 
+- Standard Input stream
 
+- cin
 
+     - cin.get()                   // read one char one time
+     
+     - cin.get(one argument)       // read one char
+     
+     - cin.get(three argument)     // read a string
+     
+     - cin.getline()               
+     
+     - cin.ignore()
+     
+     - cin.putback()
+     
 
+- Format output
 
-
-
-
-
-
+- File IO
 
 
 
