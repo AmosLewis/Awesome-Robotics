@@ -223,7 +223,8 @@ g++ c_pp.o -o hello           // link
                                              // int tmp = 3; const int &m = tmp
                     int &m = 3;           // error,  because  constant 3 does not have memory address
                     ```
-        
+               - In C++11 there is a replacement for const reference, that is **universal reference**, **T&&**, which can be used to transfer rvalue in function formal parameters. You can see the use in **MyVector.hpp** file in later chapter.
+
   - inline function
   
      - inline in C++ is a replacement for macro in C. macro in C is processed during preprocess period, just simply replace code, so there is no check on gramma and  meaning error.
