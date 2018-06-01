@@ -1751,7 +1751,66 @@ g++ c_pp.o -o hello           // link
 
      ```
      
+- Self define exception
 
+     - Inherience from standard exception, overload **virtual what** and **virtual ~destructor**
+     
+     - Example
+     ```
+     // self define exception
+     class MyOutRangeException : public exception
+     {
+     public:
+          MyOutRangeException(const char* error)
+          {
+               int len = strlen(error) + 1;
+               this->pError = new char[len];
+               strcpy(this->pError, error);
+          }
+          virtual const char* what() const  	// const makes it a compiler error for this class function to change a member variable of the class. 
+          {
+               return this->pError;
+          }
+          virtual ~MyOutRangeException()
+          {
+               if ( this->pError !=NULL)
+               {
+               delete[] this->pError;
+               }
+          }
+
+     public:
+          char* pError;
+     };
+
+     class Person
+     {
+     public:
+          Person(int age, string name)
+          {
+               if (age < 0 || age > 100)
+               {
+                    throw MyOutRangeException("age out of range")
+               }
+               mName = name;
+               mAge = age;
+          }
+     public:
+          string mName;
+          int mAge;
+     };
+     int main()
+     {
+          try{
+               Person p(101, "aaa");
+          }
+          catch(exception& e)
+          {
+               cout << e.what()<<endl;
+          }
+     }
+
+     ```
 
 #### [***Chapter_Ten***]:iostream
 
