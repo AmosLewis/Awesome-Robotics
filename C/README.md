@@ -404,7 +404,19 @@ int main()
 			
 			- 3. NULL is a macro in (stdio.h) whose value is number 0 = char '\0'.
 			
-			- 4. char '0' is char whose content is '0' and ASSCII encode value is 48.
+			- 4. char '0' is char whose content is '0' and ASSCII encode int value is 48. And char '1' ASSCII encode value is 49.  So the implementation of **atoi** function
+			
+			```
+			int atoi( char* str )
+			{
+				int res = 0;
+				for( int i = 0; str[i] != '\0'; ++i )
+				{
+					res = res*10 + str[i] - '0';
+				}
+				return res;
+			}			
+			```
 			
 
 
