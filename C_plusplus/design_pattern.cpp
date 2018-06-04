@@ -69,7 +69,7 @@ int main()
 	PersonA* personA = new PersonA;
 	personA->drive();
 
-	PersonB* personB = new PerosnB(new BMWCar);
+	PersonB* personB = new PernB(new BMWCar);
 	personB->drive();
 	delete personB;
 
