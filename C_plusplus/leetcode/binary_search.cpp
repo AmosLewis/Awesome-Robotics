@@ -376,5 +376,96 @@ public:
         return result;
     }
     
+
+ public:
+    //  428. Pow(x, n)
+    // Implement pow(x, n).
+
+    // Example
+    // Pow(2.1, 3) = 9.261
+    // Pow(0, 1) = 0
+    // Pow(1, 0) = 1
+    // Challenge
+    // O(logn) time   
+    /*
+     * @param x: the base number
+     * @param n: the power number
+     * @return: the result
+     */
+    double myPow(double x, int n) {
+        // write your code here
+    
+        if ( n < 0 ) return 1.0 / power(x, -n);
+        else return power(x, n);
+
+        // wrong solution when input 2, -2147483648 return 1
+        // if (n < 0)
+        // {
+        //     x = 1 / x;
+        //     n = -n;
+        // }
+        
+        // double ans = 1, tmp = x;
+        // while ( n != 0)
+        // {
+        //     if ( n % 2 == 1 )
+        //     {
+        //         ans = ans * tmp;
+        //     }
+        //     tmp *= tmp; 
+        //     n /= 2;
+        // }
+        
+        // return ans;
+    }
+private:
+    double power(double x, int n)
+    {
+        if ( n == 0) return 1;
+        double v = power(x, n / 2);
+        if ( n % 2 == 0) return v * v;
+        else return v * v * x;
+    }
+    
+    
+    
+    
+    
+public:
+    // 140. Fast Power
+    // Calculate the an % b where a, b and n are all 32bit integers.
+
+    // Example
+    // For 231 % 3 = 2
+
+    // For 1001000 % 1000 = 0
+
+    // Challenge
+    // O(logn)    
+    /**
+     * @param a: A 32bit integer
+     * @param b: A 32bit integer
+     * @param n: A 32bit integer
+     * @return: An integer
+     */
+    int fastPower(int a, int b, int n) {
+        // write your code here
+        
+        if ( n == 0 )
+        {
+            return 1 % b;
+        }
+        
+        if ( n == 1 )
+        {
+            return a % b;
+        }
+        
+        long long temp = fastPower( a, b, n/2);
+        if (n % 2 == 0 ) return(temp * temp ) % b;
+        else return (temp * temp % b * a) % b;
+        
+    }
+    
     
 };
