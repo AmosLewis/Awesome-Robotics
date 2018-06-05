@@ -276,6 +276,105 @@ public:
     }    
     
 
-            
+public:
+    /**
+     * @param A: an integer array
+     * @param target: An integer
+     * @param k: An integer
+     * @return: an integer array
+     */
+     
+    // 460. Find K Closest Elements
+    // Given a target number, a non-negative integer k and an integer array A sorted in ascending order, find the k closest numbers to target in A, sorted in ascending order by the difference between the number and target. Otherwise, sorted in ascending order by number if the difference is same.
+
+    // Example
+    // Given A = [1, 2, 3], target = 2 and k = 3, return [2, 1, 3].
+
+    // Given A = [1, 4, 6, 8], target = 3 and k = 3, return [4, 1, 6].
+
+    // Challenge
+    // O(logn + k) time complexity.    
+    
+    // find target
+    int findTarget(vector<int> &A, int target)
+    {
+        int start = 0;
+        int end = A.size() -1 ;
+        int loc_target = 0; 
+        while ( start + 1 < end )
+        {
+            int mid = start + (end - start)/2;
+            if ( A[mid] == target)
+            {
+                return mid;
+            }else if ( A[mid] > target )
+            {
+                end = mid;
+            }else
+            {
+                start = mid;
+            }
+        }
+        if (abs(A[start] - target) < abs(A[end] - target))
+        {
+            return start;
+        }else if (abs(A[start] - target) > abs(A[end] - target))
+        {
+            return end;
+        }else if ( A[start] < target )
+        {
+            return start;
+        }
+    }
+     
+    vector<int> kClosestNumbers(vector<int> &A, int target, int k) {
+        // write your code here
+        vector<int> result;
+        if ( A.size() == 0 || k <= 0 || A == nullptr )
+        {
+            return result;
+        }
+    
+        int loc_target = findTarget(A, target); 
+        result.push_back(A[loc_target]);
+        
+        // find K nearest
+        int left = loc_target - 1;
+        int right = loc_target + 1;
+        int count = 1;
+        
+        while (count++ < k)
+        {
+            if (left >= 0 && right < A.size())
+            {
+                if ( abs(A[left] - target) < abs(A[right] - target) )
+                {
+                    result.push_back(A[left--]);
+                }else if ( abs(A[left] - target) > abs(A[right] - target) )
+                {
+                    result.push_back(A[right++]);
+                }else
+                {
+                    if (A[left] < A[right])
+                    {
+                        result.push_back(A[left--]);
+                    }else
+                    {
+                        result.push_back(A[right++]);
+                    }
+                }
+                
+            }else if ( right == A.size() )
+            {
+                result.push_back(A[left--]);
+            }else
+            {
+                result.push_back(A[right++]);
+            }
+        }
+        
+        return result;
+    }
+    
     
 };
