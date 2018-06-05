@@ -123,7 +123,7 @@ public:
             return 0;
         }
         
-        int start = 1;
+        int start = 0;
         int end = A.size() - 1;
         
         while ( start + 1 < end )
