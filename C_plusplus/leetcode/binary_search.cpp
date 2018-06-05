@@ -205,6 +205,63 @@ public:
             }
             
         }
+
+//         // method 2
+        
+//         // step 1: find smallest number
+//         int last = A[end];
+//         while ( start + 1 < end)
+//         {
+//             int mid = start + (end - start) / 2;
+//             if ( A[mid] <= last )
+//             {
+//                 end = mid;
+//             }else
+//             {
+//                 start = mid;
+//             }
+//         }
+        
+//         int small = 0;
+        
+//         if ( A[start] > A[end])
+//         {
+//             small = end;
+//         }else
+//         {
+//             small = start;
+//         }
+        
+//         // step 2: find target
+//         //// determine start and end
+//         if ( A[small] > target )
+//         {
+//             return -1;
+//         }else if ( target <= last )
+//         {
+//             start = small;
+//             end = A.size() - 1;
+//         }else
+//         {
+//             start = 0;
+//             end = small -1;
+//         }
+//         //// compare mid and target
+//         while( start+1 < end )
+//         {
+//             int mid = start + (end - start) / 2;
+//             if ( A[mid] == target )
+//             {
+//                 return mid;
+//             }else if (A[mid] > target)
+//             {
+//                 end = mid;
+//             }else
+//             {
+//                 start = mid;
+//             }
+            
+//         }        
         
         if ( A[start] == target )
         {
@@ -218,5 +275,7 @@ public:
         return -1;
     }    
     
+
+            
     
 };
