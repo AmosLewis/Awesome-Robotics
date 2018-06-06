@@ -466,6 +466,52 @@ public:
         else return (temp * temp % b * a) % b;
         
     }
+
+    
+public:
+    // 415. Valid Palindrome
+    // Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+    // Example
+    // "A man, a plan, a canal: Panama" is a palindrome.
+
+    // "race a car" is not a palindrome.
+
+    // Challenge
+    // O(n) time without extra memory.
+    /**
+     * @param s: A string
+     * @return: Whether the string is a valid palindrome
+     */
+    bool isPalindrome(string &s) {
+        // write your code here
+        if (s.size() == 0) return true;
+         int start = 0;
+         int end = s.length() - 1;
+         while( start < end )
+         {
+             if (!isdigit(s[start]) && !isalpha(s[start]))
+             {
+                 start++;
+             }
+             if (!isdigit(s[end]) && !isalpha(s[end]))
+             {
+                 end--;
+             }
+             
+             if (start > end) break;
+             
+             if (toupper(s[start]) != toupper(s[end]))
+             {
+                 return false;
+             }
+             start++;
+             end--;
+         }
+         return true;
+    }
+    
+    
     
     
 };
