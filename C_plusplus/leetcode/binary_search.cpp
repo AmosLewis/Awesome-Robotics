@@ -562,5 +562,61 @@ public:
         
         return oddcount > 0 ? (1 + evencount) : evencount;
     }  
+
+    
+public:
+
+    // 200. Longest Palindromic Substring
+    // Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+
+    // Example
+    // Given the string = "abcdzdcab", return "cdzdc".
+
+    // Challenge
+    // O(n2) time is acceptable. Can you do it in O(n) time.
+    /**
+     * @param s: input string
+     * @return: the longest palindromic substring
+     */
+    // method 1
+    string expandAroungCenter(string &s, int left_, int right_)
+    {
+        int left = left_, right = right_;
+        int n = s.length();
+        while (left >= 0 && right <= n-1 && s[left] == s[right])
+        {
+            left--;
+            right++;
+        }
+        return s.substr(left+1, right - left - 1 );
+    }
+    
+    string longestPalindrome(string &s) {
+        // write your code here
+        int n = s.length();
+        if ( n == 0) return "";
+        
+        string longest_substring = s.substr(0,1);    // global string for update, a char is a palindromic
+        
+        for ( int i = 0; i < n-1; i++)
+        {
+            string odd_substring = expandAroungCenter(s, i, i);
+            if ( odd_substring.length() > longest_substring.length() )
+            {
+                longest_substring = odd_substring;
+            }
+            
+            string even_substring = expandAroungCenter(s, i, i+1);
+            if ( even_substring.length() > longest_substring.length() )
+            {
+                longest_substring = even_substring;
+            }
+        }
+        
+        return longest_substring;
+    }
+    
+    
+    
     
 };
