@@ -512,6 +512,55 @@ public:
     }
     
     
-    
+public:
+
+    // 627. Longest Palindrome
+    // Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
+
+    // This is case sensitive, for example "Aa" is not considered a palindrome here.
+
+    // Example
+    // Given s = "abccccdd" return 7
+
+    // One longest palindrome that can be built is "dccaccd", whose length is 7.
+    /**
+     * @param s: a string which consists of lowercase or uppercase letters
+     * @return: the length of the longest palindromes that can be built
+     */
+    int longestPalindrome(string &s) {
+        // write your code here
+        if (s.size() == 0) return 0;
+        
+        int charStateArray[52] = {0};   // ASCII a(97)-z(122) + A(65)-Z(90)
+        for (char ch: s)
+        {
+            if (ch >= 97) 
+            {
+                charStateArray[26 + ch -'a']++;
+            }else
+            {
+                charStateArray[ ch -'A']++;
+            }
+        }
+        
+        int evencount = 0;
+        int oddcount = 0;
+        for (int count: charStateArray)
+        {
+            if (count != 0)
+            {
+                if (count % 2 == 0)
+                {
+                    evencount += count;
+                }else
+                {
+                    evencount += count - 1;
+                    oddcount++;
+                }
+            }
+        }
+        
+        return oddcount > 0 ? (1 + evencount) : evencount;
+    }  
     
 };
