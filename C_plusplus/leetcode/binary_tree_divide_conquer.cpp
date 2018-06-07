@@ -34,6 +34,27 @@ public:
      * @param root: A Tree
      * @return: Preorder in ArrayList which contains node values.
      */
+    
+//     // method 2: divide and conquer
+//     vector<int> preorderTraversal(TreeNode * root) {
+//         // write your code here
+//         vector<int> result;
+        
+//         if ( root == nullptr ) return result;
+        
+//         // devide
+//         vector<int> left = preorderTraversal(root->left);
+//         vector<int> right = preorderTraversal(root->right);
+        
+//         // conquer
+//         result.push_back(root->val);
+//         result.insert(result.end(), left.begin(), left.end());
+//         result.insert(result.end(), right.begin(), right.end());
+        
+//         return result;
+//     }    
+    
+    
     // step 1: define the function of recursion: put the preorder of root into result
     // result has to be reference
     vector<int> traverse( TreeNode * root, vector<int>& result)
